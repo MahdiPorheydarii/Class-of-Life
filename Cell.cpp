@@ -2,13 +2,14 @@
 
 using namespace std;
 
-class Gene{
+class Genome{
+  friend class Cell;
+  
   private:
     string DNA, RNA;
 
 
   public:
-    string createDNA();
     void RNAtoDNA();
     void shortMut(char a, char b, int c);
     void longMut(string S1, string S2);
@@ -20,16 +21,18 @@ class Gene{
 class Cell{
   private:
     int cntChromo;
-    vector<Gene> r;
+    vector<Genome> r;
 
   public:
+    void setGenomes(int n);
     void Celldie();
 };
+
 int main(){
 
 }
 
-void Gene::shortMut(char a, char b, int c){
+void Genome::shortMut(char a, char b, int c){
   int q = 0;
   for(int i = 0; i < RNA.size(); i++){
     if(RNA[i] == b){
@@ -49,7 +52,7 @@ void Gene::shortMut(char a, char b, int c){
   fix();
 }
 
-void Gene::fix(){
+void Genome::fix(){
   string s;
   for(int i = 0; i < DNA.size() / 2; i++) s += DNA[i];
   s += '+';
@@ -62,7 +65,7 @@ void Gene::fix(){
   DNA = s;
 }
 
-void Gene::longMut(string S1, string S2){
+void Genome::longMut(string S1, string S2){
   //RNA
   size_t r = RNA.find(S1);
   string d;
@@ -76,7 +79,7 @@ void Gene::longMut(string S1, string S2){
   //DNA
 }
 
-void Gene::revMut(string S1){
+void Genome::revMut(string S1){
   reverse(S1.begin(), S1.end());
   string S2 = S1;
   reverse(S1.begin(), S1.end());
@@ -101,7 +104,7 @@ void Gene::revMut(string S1){
   }
 }
 
-string Gene::RNAtoDNA(){
+void Genome::RNAtoDNA(){
   string s;
   s += RNA;
   s += '+';
@@ -115,5 +118,18 @@ string Gene::RNAtoDNA(){
   for(int i = 0; i < s.size(); i++){
     if(s[i] == '+') cout << endl;
     else cout << s[i];
+  }
+}
+
+void Cell::setGenomes(int n){
+  string s1, s2, fin;
+  for(int i = 0; i < n; i++){
+    cin >> s1 >> s2;
+    fin += s1;
+    fin += '+';
+    fin += s2;
+    Genome last;
+    last.DNA = fin;
+    r.push_back(last);
   }
 }
