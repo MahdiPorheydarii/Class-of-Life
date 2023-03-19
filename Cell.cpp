@@ -77,10 +77,27 @@ void Gene::longMut(string S1, string S2){
 }
 
 void Gene::revMut(string S1){
-  size_t r = RNA.find(S1);
   reverse(S1.begin(), S1.end());
+  string S2 = S1;
+  reverse(S1.begin(), S1.end());
+  size_t r = RNA.find(S1);
   for(int i = r; i < S1.size() + r; i++){
-    RNA[i] = S1[i];
+    RNA[i] = S2[i];
+  }
+
+  if(DNA.find(S1) < DNA.find(S2)){
+    size_t t = DNA.find(S1);
+    for(int i = t; i < S1.size() + t; i++){
+    DNA[i] = S2[i];
+    } 
+    fix();
+  }
+  else{
+    size_t t = DNA.find(S2);
+    for(int i = t; i < S2.size() + t; i++){
+    DNA[i] = S2[i];
+    } 
+    fix();
   }
 }
 
