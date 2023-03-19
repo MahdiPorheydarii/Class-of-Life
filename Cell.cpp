@@ -9,7 +9,7 @@ class Gene{
 
   public:
     string createDNA();
-    string RNAtoDNA();
+    void RNAtoDNA();
     void shortMut(char a, char b, int c);
     void longMut(string S1, string S2);
     void revMut(string S1);
@@ -111,6 +111,9 @@ string Gene::RNAtoDNA(){
   if(RNA[i] == 'C') s += 'G';
   if(RNA[i] == 'G') s += 'C';
   }
-  return s;
+  cout << "DNA is:" << endl;
+  for(int i = 0; i < s.size(); i++){
+    if(s[i] == '+') cout << endl;
+    else cout << s[i];
+  }
 }
-
