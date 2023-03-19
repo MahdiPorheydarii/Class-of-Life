@@ -12,6 +12,7 @@ class Gene{
     string RNAtoDNA();
     void shortMut(char a, char b, int c);
     void longMut(string S1, string S2);
+    void revMut(string S1);
     void fix();
     
 };
@@ -69,10 +70,18 @@ void Gene::longMut(string S1, string S2){
   d += S2;
   for(int i = r+S1.size()+S2.size(); i < RNA.size(); i++) d+= RNA[i];
   //RNA
-  
+
   //DNA
       //DNA here
   //DNA
+}
+
+void Gene::revMut(string S1){
+  size_t r = RNA.find(S1);
+  reverse(S1.begin(), S1.end());
+  for(int i = r; i < S1.size() + r; i++){
+    RNA[i] = S1[i];
+  }
 }
 
 string Gene::RNAtoDNA(){
@@ -87,3 +96,4 @@ string Gene::RNAtoDNA(){
   }
   return s;
 }
+
