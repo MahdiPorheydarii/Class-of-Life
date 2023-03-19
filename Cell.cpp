@@ -78,4 +78,3 @@ string Gene::RNAtoDNA(){
   }
   return s;
 }
-//tehran
