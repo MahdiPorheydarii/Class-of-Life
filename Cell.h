@@ -50,18 +50,19 @@ void Genome::RNAtoDNA()
 
 void Genome::shortMut(char A, char C, int n)
 {
-  vector<int> indexes;
+  int c1 = 0, c2 = 0;
   for (int i = 0; i < RNA.size(); i++)
   {
-    if (RNA[i] == A)
+    if (RNA[i] == A and c1 != n)
     {
       RNA[i] = C;
-      indexes.push_back(i);
+      c1++;
     }
-    if (indexes.size() == n)
-      break;
+    if(DNA[i] == A and c2 != n){
+      DNA[i] = C;
+      c2++;
+    }
   }
-  this->DNA.s1=RNA;
   for (auto x:indexes){
     DNA.s2[x]=complement(DNA.s1[x]);
   }
