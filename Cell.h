@@ -117,17 +117,16 @@ void Genome::revMut(string S1)
   }
 }
 
+// fixed
 void Cell::setGenomes(int n)
 {
-  string s1, s2, fin;
+  string p1, p2;
   for (int i = 0; i < n; i++)
   {
-    cin >> s1 >> s2;
-    fin += s1;
-    fin += '+';
-    fin += s2;
+    cin >> p1 >> p2;
     Genome last;
-    last.DNA = fin;
+    last.DNA.s1 = p1;
+    last.DNA.s2 = p2;
     r.push_back(last);
   }
 }
