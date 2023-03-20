@@ -74,3 +74,10 @@ double StringSim(string s1,string s2){
     lenLCS=LCS(s1,s2,s1.length(),s2.length());
     return 100 * lenLCS/double(max(s1.length(),s2.length()));
 }
+
+// calculates sum of a vector members(shall be needed for calculating similarity percentage of two Animals)
+int sum(vector<int> a){
+    int b = 0;
+    for(auto x:a) b += x;
+    return b;
+}

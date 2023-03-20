@@ -8,29 +8,24 @@ using namespace std;
 class Genome
 {
   friend class Cell;
-
 private:
   dna DNA; 
   string RNA;
 
 public:
   void RNAtoDNA();  
-  Genome(string rn){
-    this->RNA=rn;
-    RNAtoDNA();
-  }
+  Genome(string rn);
   Genome();
-  void des(){
-  ~Genome();
-  }
+  void des();
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
-  void fix();
+
 };
 
 class Cell
 {
+  friend class Animal;
 private:
   int cntChromo;
   vector<Genome> r;
@@ -39,6 +34,18 @@ public:
   void setGenomes(int n);
   void Celldie();
   
+};
+
+class Animal{
+  friend bool operator ==(Animal a, Animal b);
+  friend Animal operator +(Animal a, Animal b);
+private:
+  vector<Cell> r;
+
+
+public:
+  double similarityPercentage();
+
 };
 
 void Genome::RNAtoDNA()
@@ -50,6 +57,14 @@ void Genome::RNAtoDNA()
   cout<<DNA.s1<<endl;
   cout<<DNA.s2<<endl;
 }
+
+Genome::Genome(string rn){
+    this->RNA=rn;
+    RNAtoDNA();
+}
+void Genome::des(){
+  ~Genome();
+  }
 
 void Genome::shortMut(char A, char C, int n)
 {
@@ -90,7 +105,7 @@ void Genome::longMut(string S1, string S2){
 
 // next functions should be updated with respect to algo.h and structures.h
 
-// fixed with def functions, to be updated by algo.h functions
+// fixed with def functions, to be updated with algo.h functions
 void Genome::revMut(string S1)
 {
   reverse(S1.begin(), S1.end());
@@ -146,4 +161,12 @@ void Cell::Celldie(){
       if(AT / CG > 3) r[j].des();
     }
   }
+}
+
+bool operator ==(Animal a, Animal b){
+  
+}
+
+Animal operator +(Animal a, Animal b){
+
 }
