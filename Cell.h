@@ -63,8 +63,8 @@ void Genome::shortMut(char A, char C, int n)
       c2++;
     }
   }
-  for (auto x:indexes){
-    DNA.s2[x]=complement(DNA.s1[x]);
+  for (auto x:DNA.s1){
+    DNA.s2[x]=complement(x);
   }
 }
 
@@ -93,28 +93,21 @@ void Genome::revMut(string S1)
   reverse(S1.begin(), S1.end());
   size_t r = RNA.find(S1);
   for (int i = r; i < S1.size() + r; i++)
-  {
     RNA[i] = S2[i];
-  }
 
-  if (DNA.find(S1) < DNA.find(S2))
+  if (DNA.s1.find(S1) < DNA.s2.find(S2))
   {
-    size_t t = DNA.find(S1);
+    size_t t = DNA.s1.find(S1);
     for (int i = t; i < S1.size() + t; i++)
-    {
-      DNA[i] = S2[i];
-    }
-    fix();
+      DNA.s1[i] = S2[i];
   }
   else
   {
-    size_t t = DNA.find(S2);
+    size_t t = DNA.s1.find(S2);
     for (int i = t; i < S2.size() + t; i++)
-    {
-      DNA[i] = S2[i];
-    }
-    fix();
+      DNA.s1[i] = S2[i];
   }
+  for(auto x:)
 }
 
 // fixed
