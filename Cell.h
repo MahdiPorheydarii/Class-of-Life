@@ -7,7 +7,6 @@ using namespace std;
 
 class Genome
 {
-  friend class Cell;
 private:
   dna DNA; 
   string RNA;
@@ -23,9 +22,8 @@ public:
 
 };
 
-class Cell
+class Cell : private Genome
 {
-  friend class Animal;
 private:
   int cntChromo;
   vector<Genome> r;
@@ -36,7 +34,8 @@ public:
   
 };
 
-class Animal{
+class Animal : private Cell
+{
   friend bool operator ==(Animal a, Animal b);
   friend Animal operator +(Animal a, Animal b);
 private:
@@ -76,8 +75,8 @@ void Genome::shortMut(char A, char C, int n)
       RNA[i] = C;
       c1++;
     }
-    if(DNA[i] == A and c2 != n){
-      DNA[i] = C;
+    if(DNA.s1[i] == A and c2 != n){
+      DNA.s1[i] = C;
       c2++;
     }
   }
