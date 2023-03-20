@@ -20,7 +20,9 @@ public:
     RNAtoDNA();
   }
   Genome();
-  
+  void des(){
+  ~Genome();
+  }
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
@@ -36,6 +38,7 @@ private:
 public:
   void setGenomes(int n);
   void Celldie();
+  
 };
 
 void Genome::RNAtoDNA()
@@ -86,6 +89,8 @@ void Genome::longMut(string S1, string S2){
 
 
 // next functions should be updated with respect to algo.h and structures.h
+
+// fixed with def functions, to be updated by algo.h functions
 void Genome::revMut(string S1)
 {
   reverse(S1.begin(), S1.end());
@@ -121,5 +126,24 @@ void Cell::setGenomes(int n)
     last.DNA.s1 = p1;
     last.DNA.s2 = p2;
     r.push_back(last);
+  }
+}
+
+// need to be checked
+void Cell::Celldie(){
+  for(int j = 0; j < r.size(); j++){
+    int death = 0;
+    for(int i = 0; i < r[j].DNA.s1.size(); i++){
+      if(r[j].DNA.s1[i] != complement(r[j].DNA.s2[i])) death++;
+    }
+    if(death > 4) r[j].des();
+    else{
+      double AT = 0, CG = 0;
+      for(int i = 0; i < r[j].DNA.s1.size(); i++){
+        if(r[j].DNA.s1[i] == complement(r[j].DNA.s2[i]))
+        (r[j].DNA.s1[i] == 'A' or r[j].DNA.s1[i] == 'T') ? AT++ : CG++;
+      }
+      if(AT / CG > 3) r[j].des();
+    }
   }
 }
