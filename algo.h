@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#define pb push_back
+#define vc vector
+
 char complement(char x){
   if (x=='A') return 'T';
   if (x=='T') return 'A';

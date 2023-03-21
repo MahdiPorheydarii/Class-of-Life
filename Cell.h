@@ -14,6 +14,8 @@ private:
 public:
   void RNAtoDNA();  
   Genome(string rn);
+  Genome(string dn1, string dn2);
+  Genome(string rn, string dn1, string dn2);
   Genome();
   void des();
   void shortMut(char a, char b, int c);
@@ -26,7 +28,7 @@ class Cell : private Genome
 {
 private:
   int cntChromo;
-  vector<Genome> r;
+  vc<Genome> r;
 
 public:
   void setGenomes(int n);
@@ -39,7 +41,7 @@ class Animal : private Cell
   friend bool operator ==(Animal a, Animal b);
   friend Animal operator +(Animal a, Animal b);
 private:
-  vector<Cell> r;
+  vc<Cell> r;
 
 
 public:
@@ -59,8 +61,19 @@ void Genome::RNAtoDNA()
 
 Genome::Genome(string rn){
     this->RNA=rn;
-    RNAtoDNA();
 }
+
+Genome::Genome(string dn1, string dn2){
+    this->DNA.s1=dn1;
+    this->DNA.s1=dn2;
+}
+
+Genome::Genome(string rn, string dn1, string dn2){
+    this->RNA=rn;
+    this->DNA.s1=dn1;
+    this->DNA.s1=dn2;
+}
+
 void Genome::des(){
   ~Genome();
   }
@@ -139,7 +152,7 @@ void Cell::setGenomes(int n)
     Genome last;
     last.DNA.s1 = p1;
     last.DNA.s2 = p2;
-    r.push_back(last);
+    r.pb(last);
   }
 }
 
