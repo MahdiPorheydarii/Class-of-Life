@@ -84,3 +84,33 @@ int sum(vector<int> a){
     for(auto x:a) b += x;
     return b;
 }
+
+// palindrome algorithm
+
+vector<int> palindrome(string t) {
+    string s;
+    for(auto c: t) {
+        s += string("#") + c;
+    }
+    int n = s.size();
+    s = "$" + s + "^";
+    vector<int> p(n + 2);
+    int l = 1, r = 1;
+    for(int i = 1; i <= n; i++) {
+        p[i] = max(0, min(r - i, p[l + (r - i)]));
+        while(s[i - p[i]] == complement(s[i + p[i]])) {
+            p[i]++;
+        }
+        if(i + p[i] > r) {
+            l = i - p[i], r = i + p[i];
+        }
+    }
+    vector<int> manc = vector<int>(begin(p) + 1, end(p) - 1);
+    
+    vector<int> result;
+    for (int i = 2; i < manc.size(); i++){
+        if (i%2==0) result.push_back((manc[i]-1)/2);
+    }
+
+    return result;
+}
