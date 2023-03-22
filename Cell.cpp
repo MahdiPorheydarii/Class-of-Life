@@ -8,11 +8,11 @@ vc<Animal> a;
 void GenSet(int n){
   for(int i = 0; i < n; i++){
     string rn1, dn1, dn2;
-    cout << "enter number " << i+1 << " Genome's RNA" << endl:
+    cout << "enter number " << i+1 << " Genome's RNA" << endl;
     cin >> rn1;
-    cout << "enter number " << i+1 << " Genome's part 1 DNA" << endl:
+    cout << "enter number " << i+1 << " Genome's part 1 DNA" << endl;
     cin >> dn1;
-    cout << "enter number " << i+1 << " Genome's part 2 DNA" << endl:
+    cout << "enter number " << i+1 << " Genome's part 2 DNA" << endl;
     cin >> dn2;
     Genome tmp(rn1, dn1, dn2);
     g.pb(tmp);
@@ -51,7 +51,7 @@ void go(){
     cout << " 1- Genome\n 2- Cell" << endl;
     cin >> ch4;
     if((ch4 == 1 and g.size() == 0) or (ch4 == 2 and c.size() == 0)){
-      cout << "You have not added any "; (ch4 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
+      cout << "You have not added any "; (ch4 == 1) ? cout << "Genome" ; cout << "Cell"; cout << " to the database yet, please try again" << endl;
     }
   }
 }
