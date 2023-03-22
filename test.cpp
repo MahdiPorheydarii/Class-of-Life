@@ -1,18 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define pb push_back
-#define vc vector
 
-char complement(char x){
-  if (x=='A') return 'T';
-  if (x=='T') return 'A';
-  if (x=='C') return 'G';
-  if (x=='G') return 'C';
-}
-
-
-// this searches for s1 in s2
 int KMP(string s1, string s2){
     int m=s1.length();
     int n=s2.length();
@@ -64,23 +53,8 @@ int KMP(string s1, string s2){
     return -1;
 }
 
-// this function returns Longest Common Substring 
-int LCS(string s1,string s2,int m,int n){
-    if (m==0 or n==0) return 0;
-    if (s1[m-1]==s2[n-1]) return 1+LCS(s1,s2,m-1,n-1);
-    else return max(LCS(s1,s2,m,n-1),LCS(s1,s2,m-1,n));
-}
-
-// Calculates the similarity percentage between two strings
-double StringSim(string s1,string s2){
-    int lenLCS=0;
-    lenLCS=LCS(s1,s2,s1.length(),s2.length());
-    return 100 * lenLCS/double(max(s1.length(),s2.length()));
-}
-
-// calculates sum of a vector members(shall be needed for calculating similarity percentage of two Animals)
-int sum(vector<int> a){
-    int b = 0;
-    for(auto x:a) b += x;
-    return b;
+int main(){
+    string txt = "ABABDABACDABABCABABABABCABAB";
+    string pat = "ABABCABAB";
+    cout<<KMP(pat,txt);
 }
