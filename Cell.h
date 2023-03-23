@@ -77,9 +77,9 @@ Genome::Genome(string rn, string dn1, string dn2){
     this->DNA.s1=dn2;
 }
 
-// void Genome::des(){
-//   ~Genome();
-//   }
+void Genome::des(){
+  ~Genome();
+  }
 
 void Genome::shortMut(char A, char C, int n)
 {
@@ -156,15 +156,24 @@ string Genome::getRNA(){
 }
 
 Cell::Cell(vector<Genome> r){
-  gz = r;
+  this->gz = r;
 }
 
 void Cell::setCell(vector<Genome> r){
-  gz = r;
+  this->gz = r;
 }
 
 void Cell::Celldie(){
-
+  for(int j = 0; j < gz.size(); j++){
+    int die = 0;
+    for(int i = 0; i < gz[j].getDNA().s1.size(); i++){
+      if(gz[j].getDNA().s1[i] != complement(gz[j].getDNA().s2[i])) die++;
+    }
+    if(die > 4){
+      gz[j].des();
+      j -= 1;
+    }
+  }
 }
 
 bool operator ==(Animal a, Animal b){
