@@ -28,10 +28,10 @@ class Cell : private Genome
 {
 private:
   int cntChromo;
-  vc<Genome> r;
+  vc<vc<Genome>> gz;
 
 public:
-  void setGenomes(int n);
+  Cell(vc<Genome> r);
   void Celldie();
   
 };
@@ -142,18 +142,8 @@ void Genome::revMut(string S1)
   for(auto x:)
 }
 
-// fixed
-void Cell::setGenomes(int n)
-{
-  string p1, p2;
-  for (int i = 0; i < n; i++)
-  {
-    cin >> p1 >> p2;
-    Genome last;
-    last.DNA.s1 = p1;
-    last.DNA.s2 = p2;
-    r.pb(last);
-  }
+Cell ::Cell(vc<Genome> r){
+  gz.pb(r);
 }
 
 // need to be checked
