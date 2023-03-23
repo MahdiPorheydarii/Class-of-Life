@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#include <algo.h>
-#include <structures.h>
+#include "structures.h"
+#include "algo.h"
 
 using namespace std;
 
@@ -30,10 +30,10 @@ class Cell : private Genome
 {
 private:
   int cntChromo;
-  vc<vc<Genome>> gz;
+  vector<vector<Genome>> gz;
 
 public:
-  Cell(vc<Genome> r);
+  Cell(vector<Genome> r);
   void Celldie();
   
 };
@@ -43,7 +43,7 @@ class Animal : private Cell
   friend bool operator ==(Animal a, Animal b);
   friend Animal operator +(Animal a, Animal b);
 private:
-  vc<Cell> cz;
+  vector<Cell> cz;
 
 
 public:
@@ -76,9 +76,9 @@ Genome::Genome(string rn, string dn1, string dn2){
     this->DNA.s1=dn2;
 }
 
-void Genome::des(){
-  ~Genome();
-  }
+// void Genome::des(){
+//   ~Genome();
+//   }
 
 void Genome::shortMut(char A, char C, int n)
 {
@@ -125,19 +125,19 @@ void Genome::revMut(string S1)
   reverse(S1.begin(), S1.end());
   string S2 = S1;
   reverse(S1.begin(), S1.end());
-  size_t r = RNA.find(S1);
+  size_t r = KMP(S1, RNA);
   for (int i = r; i < S1.size() + r; i++)
     RNA[i] = S2[i];
 
-  if (DNA.s1.find(S1) < DNA.s2.find(S2))
+  if (KMP(S1, DNA.s1) < KMP(S2, DNA.s2))
   {
-    size_t t = DNA.s1.find(S1);
+    size_t t = KMP(S1, DNA.s1);
     for (int i = t; i < S1.size() + t; i++)
       DNA.s1[i] = S2[i];
   }
   else
   {
-    size_t t = DNA.s1.find(S2);
+    size_t t = KMP(S2, DNA.s1);
     for (int i = t; i < S2.size() + t; i++)
       DNA.s1[i] = S2[i];
   }
@@ -154,8 +154,8 @@ string Genome::getRNA(){
   return RNA;
 }
 
-Cell ::Cell(vc<Genome> r){
-  gz.pb(r);
+Cell ::Cell(vector<Genome> r){
+  gz.push_back(r);
 }
 
 void Cell::Celldie(){

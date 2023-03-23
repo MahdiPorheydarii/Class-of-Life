@@ -1,9 +1,9 @@
 #include "Cell.h"
 using namespace std;
 
-vc<Genome> g;
-vc<Cell> c;
-vc<Animal> a;
+vector<Genome> g;
+vector<Cell> c;
+vector<Animal> a;
 
 void GenSet(int n){
   for(int i = 0; i < n; i++){
@@ -15,14 +15,14 @@ void GenSet(int n){
     cout << "enter number " << i+1 << " Genome's part 2 DNA:" << endl;
     cin >> dn2;
     Genome tmp(rn1, dn1, dn2);
-    g.pb(tmp);
+    g.push_back(tmp);
   }
   system("cls");
   cout << "you have succesfully added Genomes to database, please choose your next wish:" << endl;
 }
 
 void CellSet(int n, int a){
-  vc<Genome> tempo;
+  vector<Genome> tempo;
   for(int i = 1; i < a+1; i++){
     string dn1, dn2;
     cout << "enter number " << n+1 << " Cell's number " << i << " Genome's part 1 DNA:" << endl;
@@ -30,10 +30,10 @@ void CellSet(int n, int a){
     cout << "enter number " << n+1 << " Cell's number " << i << " Genome's part 2 DNA:" << endl;
     cin >> dn2;
     Genome tmp(dn1, dn2);
-    tempo.pb(tmp);
+    tempo.push_back(tmp);
   }
   Cell yum(tempo);
-  c.pb(yum);
+  c.push_back(yum);
 }
 
 void go(){
