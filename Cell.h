@@ -12,7 +12,7 @@ private:
   string RNA;
 
 public:
-  void RNAtoDNA();  
+  dna RNAtoDNA();  
   Genome(string rn);
   Genome(string dn1, string dn2);
   Genome(string rn, string dn1, string dn2);
@@ -21,6 +21,8 @@ public:
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
+  dna getDNA();
+  string getRNA();
 
 };
 
@@ -41,7 +43,7 @@ class Animal : private Cell
   friend bool operator ==(Animal a, Animal b);
   friend Animal operator +(Animal a, Animal b);
 private:
-  vc<Cell> r;
+  vc<Cell> cz;
 
 
 public:
@@ -49,14 +51,14 @@ public:
 
 };
 
-void Genome::RNAtoDNA()
+dna Genome::RNAtoDNA()
 {
-  this->DNA.s1=RNA;
-  for (auto x:RNA){
-    this->DNA.s2+=complement(x);
+  dna duh;
+  duh.s1 = RNA;
+  for(auto x:RNA){
+    duh.s2 += complement(x);
   }
-  cout<<DNA.s1<<endl;
-  cout<<DNA.s2<<endl;
+  return duh;
 }
 
 Genome::Genome(string rn){
@@ -93,8 +95,8 @@ void Genome::shortMut(char A, char C, int n)
       c2++;
     }
   }
-  for (auto x:DNA.s1){
-    DNA.s2[x]=complement(x);
+  for(auto x:DNA.s1){
+    DNA.s2 += complement(x);
   }
 }
 
@@ -139,30 +141,25 @@ void Genome::revMut(string S1)
     for (int i = t; i < S2.size() + t; i++)
       DNA.s1[i] = S2[i];
   }
-  for(auto x:)
+  for(auto x:DNA.s1){
+    DNA.s2 += complement(x);
+  }
+}
+
+dna Genome::getDNA(){
+  return DNA;
+}
+
+string Genome::getRNA(){
+  return RNA;
 }
 
 Cell ::Cell(vc<Genome> r){
   gz.pb(r);
 }
 
-// need to be checked
 void Cell::Celldie(){
-  for(int j = 0; j < r.size(); j++){
-    int death = 0;
-    for(int i = 0; i < r[j].DNA.s1.size(); i++){
-      if(r[j].DNA.s1[i] != complement(r[j].DNA.s2[i])) death++;
-    }
-    if(death > 4) r[j].des();
-    else{
-      double AT = 0, CG = 0;
-      for(int i = 0; i < r[j].DNA.s1.size(); i++){
-        if(r[j].DNA.s1[i] == complement(r[j].DNA.s2[i]))
-        (r[j].DNA.s1[i] == 'A' or r[j].DNA.s1[i] == 'T') ? AT++ : CG++;
-      }
-      if(AT / CG > 3) r[j].des();
-    }
-  }
+
 }
 
 bool operator ==(Animal a, Animal b){
