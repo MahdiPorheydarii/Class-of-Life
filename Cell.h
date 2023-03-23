@@ -30,23 +30,24 @@ class Cell : private Genome
 {
 private:
   int cntChromo;
-  vector<vector<Genome>> gz;
+  vector<Genome> gz;
 
 public:
   Cell(vector<Genome> r);
+  void setCell(vector<Genome> r);
   void Celldie();
   
 };
 
-class Animal : private Cell
+class Animal : public Cell
 {
   friend bool operator ==(Animal a, Animal b);
   friend Animal operator +(Animal a, Animal b);
-private:
-  vector<Cell> cz;
-
 
 public:
+  Animal(){
+
+  }
   double similarityPercentage();
 
 };
@@ -154,8 +155,12 @@ string Genome::getRNA(){
   return RNA;
 }
 
-Cell ::Cell(vector<Genome> r){
-  gz.push_back(r);
+Cell::Cell(vector<Genome> r){
+  gz = r;
+}
+
+void Cell::setCell(vector<Genome> r){
+  gz = r;
 }
 
 void Cell::Celldie(){

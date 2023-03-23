@@ -60,7 +60,7 @@ void go(){
     cin >> cCount;
     for(int i = 0; i < cCount; i++){
       int q;
-      cout << "how many Genomes does Cell " << i + 1 << " have?" << endl;
+      cout << "how many Genomes does Cell " << i + 1 << " numbered have?" << endl;
       cin >> q;
       CellSet(i, q);
     }
@@ -69,7 +69,26 @@ void go(){
     return;
   }
   if(ch == 3){
-
+    int aCount;
+    cout << "how many animals do you want to create?" << endl;
+    cin >> aCount;
+    for(int i = 0; i < aCount; i++){
+      int gzz;
+        cout << "how many chromosomes does your " << i+1 <<" numbered animal cell have?" << endl;
+        cin >> gzz;
+        Animal A1;
+        vector<Genome> ttmp;
+        for(int i = 0; i < gzz; i++){
+          string dn1, dn2;
+          cout << "enter number " << i+1 << " Chromosome's part 1 DNA:" << endl;
+          cin >> dn1;
+          cout << "enter number " << i+1 << " Chromosome's part 2 DNA:" << endl;
+          cin >> dn2;
+          Genome tomp(dn1, dn2);
+          ttmp.push_back(tomp);
+        }
+        A1.setCell(ttmp);
+    }
   }
   if(ch == 4){
     int ch4;
