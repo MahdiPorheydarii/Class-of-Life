@@ -29,6 +29,7 @@ public:
 class Cell : private Genome
 {
 private:
+  friend void go();
   int cntChromo;
   vector<Genome> gz;
 

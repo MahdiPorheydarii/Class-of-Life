@@ -39,9 +39,6 @@ int KMP(string s1, string s2){
             }
         }
     }
-    for (auto x:lps){
-        cout<<x<<" ";
-    }
     cout<<endl;
     int j=0;
     i=0;

@@ -118,14 +118,21 @@ void go(){
       return;
     }
     else if(ch4 == 2){
-      int cellPick, chroPick;
+      int cellPick, chroPick, nuum;
+      char s1, s2;
       cout << "please tell us the Cell's index which you want to perform a short mutation on(1 based):" << endl;
       cin >> cellPick;
       cout << "please tell us the Chromosomes's index which you want to perform a short mutation on(1 based):" << endl;
       cin >> chroPick;
-      c[cellPick - 1].gz[chroPick - 1].shortMut();
+      cout << "please tell us the character you want to look for in Genome:" << endl;
+      cin >> s1;
+      cout << "please tell us the character you want to replace in Genome:" << endl;
+      cin >> s2;
+      cout << "please tell us the number of times which you want to perform the act(n)" << endl;
+      cin >> nuum;
+      c[cellPick - 1].gz[chroPick - 1].shortMut(s1, s2, nuum);
       cout << "short mutation has been performed." << endl << "Chromosome after the performance:" << endl;
-      cout <<"Chromosome's DNA:\n" << g[num-1].getDNA().s1 << endl << g[num-1].getDNA().s2 << endl;
+      cout <<"Chromosome's DNA:\n" <<c[cellPick - 1].gz[chroPick - 1].getDNA().s1 << endl << c[cellPick - 1].gz[chroPick - 1].getDNA().s2 << endl;
       return;
     }
   }
@@ -138,7 +145,8 @@ void go(){
       cout << "You have not added any "; (ch5 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
     }
     else if(ch5 == 1){
-      int genPick, S1, S2;
+      int genPick;
+      string S1, S2;
       cout << "please tell us the Genome's index which you want to perform a short mutation on(1 based):" << endl;
       cin >> genPick;
       cout << "please tell us the string you want to look for in Genome:" << endl;
