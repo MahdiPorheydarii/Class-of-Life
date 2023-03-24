@@ -37,19 +37,24 @@ public:
   Cell(vector<Genome> r);
   void setCell(vector<Genome> r);
   void Celldie();
+  vector<Genome> getGz();
   
 };
 
 class Animal : public Cell
 {
+  friend void go();
   friend bool operator ==(Animal a, Animal b);
   friend Animal operator +(Animal a, Animal b);
+  
+private:
+  Cell cc;
 
 public:
   Animal(){
 
   }
-  double similarityPercentage();
+  double similarityPercentage(Animal A, Animal B);
 
 };
 
@@ -132,7 +137,7 @@ void Genome::longMut(string S1, string S2){
           ttmpp += DNA.s1[i];
         }
         ttmpp += S2;
-        for(int i = r+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1.[i];
+        for(int i = r+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1[i];
         DNA.s1 = ttmpp;
         for(auto x:DNA.s1){
           q += complement(x);
@@ -145,7 +150,7 @@ void Genome::longMut(string S1, string S2){
           ttmpp += DNA.s2[i];
         }
         ttmpp += S2;
-        for(int i = r+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2.[i];
+        for(int i = r+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2[i];
         DNA.s2 = ttmpp;
         for(auto x:DNA.s2){
           q += complement(x);
@@ -216,10 +221,22 @@ void Cell::Celldie(){
   }
 }
 
+vector<Genome> Cell::getGz(){
+  return gz;
+}
+
 bool operator ==(Animal a, Animal b){
   
 }
 
 Animal operator +(Animal a, Animal b){
 
+}
+
+double Animal::similarityPercentage(Animal A, Animal B){
+  double a = 0;
+  for(int i = 0; i < A.cc.getGz().size(); i++){
+    a += StringSim(A.cc.getGz()[i].getDNA().s1, B.cc.getGz()[i].getDNA().s1);
+  }
+  return a / A.cc.getGz().size();
 }

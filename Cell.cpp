@@ -87,7 +87,7 @@ void go(){
           Genome tomp(dn1, dn2);
           ttmp.push_back(tomp);
         }
-        A1.setCell(ttmp);
+        A1.cc.setCell(ttmp);
     }
     system("CLS");
     cout << "you have succesfully added your Animals to database, please choose your next wish:" << endl;
