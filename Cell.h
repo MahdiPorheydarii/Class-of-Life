@@ -119,11 +119,38 @@ void Genome::longMut(string S1, string S2){
   string d;
   for(int i = 0; i < r; i++) d+= RNA[i];
   d += S2;
-  for(int i = r+S1.size()+S2.size(); i < RNA.size(); i++) d+= RNA[i];
+  for(int i = r+S1.size(); i < RNA.size(); i++) d += RNA[i];
+  RNA = d;
   //RNA
 
   //DNA
-      //DNA here
+      size_t f = min(KMP(S1,DNA.s1), KMP(S1,DNA.s2));
+      if(KMP(S1,DNA.s1) <= KMP(S1,DNA.s2)){
+        string ttmpp, q;
+        for(int i = 0; i < f; i++){
+          ttmpp += DNA.s1[i];
+        }
+        ttmpp += S2;
+        for(int i = r+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1.[i];
+        DNA.s1 = ttmpp;
+        for(auto x:DNA.s1){
+          q += complement(x);
+        }
+        DNA.s2 = q;
+      }
+      else{
+        string ttmpp, q;
+        for(int i = 0; i < f; i++){
+          ttmpp += DNA.s2[i];
+        }
+        ttmpp += S2;
+        for(int i = r+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2.[i];
+        DNA.s2 = ttmpp;
+        for(auto x:DNA.s2){
+          q += complement(x);
+        }
+        DNA.s1 = q;
+      }
   //DNA
 }
 
