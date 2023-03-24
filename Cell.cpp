@@ -89,6 +89,9 @@ void go(){
         }
         A1.setCell(ttmp);
     }
+    system("CLS");
+    cout << "you have succesfully added your Animals to database, please choose your next wish:" << endl;
+    return;
   }
   if(ch == 4){
     int ch4;

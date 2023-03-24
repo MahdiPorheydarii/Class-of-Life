@@ -84,6 +84,7 @@ void Genome::des(){
 void Genome::shortMut(char A, char C, int n)
 {
   int c1 = 0, c2 = 0;
+  vector<int> p1, p2;
   for (int i = 0; i < RNA.size(); i++)
   {
     if (RNA[i] == A and c1 != n)
@@ -93,11 +94,20 @@ void Genome::shortMut(char A, char C, int n)
     }
     if(DNA.s1[i] == A and c2 != n){
       DNA.s1[i] = C;
+      p1.push_back(i);
       c2++;
     }
+    if(DNA.s2[i] == A and c2 != n){
+    DNA.s2[i] = C;
+    p2.push_back(i);
+    c2++;
+    }
   }
-  for(auto x:DNA.s1){
-    DNA.s2 += complement(x);
+  for(auto x:p1){
+    DNA.s2[x] = complement(DNA.s1[x]);
+  }
+  for(auto x:p2){
+    DNA.s1[x] = complement(DNA.s2[x]);
   }
 }
 
@@ -123,6 +133,7 @@ void Genome::longMut(string S1, string S2){
 // fixed with def functions, to be updated with algo.h functions
 void Genome::revMut(string S1)
 {
+  string temp;
   reverse(S1.begin(), S1.end());
   string S2 = S1;
   reverse(S1.begin(), S1.end());
@@ -143,8 +154,9 @@ void Genome::revMut(string S1)
       DNA.s1[i] = S2[i];
   }
   for(auto x:DNA.s1){
-    DNA.s2 += complement(x);
+    temp += complement(x);
   }
+  DNA.s2 = temp;
 }
 
 dna Genome::getDNA(){
