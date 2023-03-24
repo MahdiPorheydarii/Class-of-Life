@@ -9,6 +9,8 @@ char complement(char x){
   if (x=='T') return 'A';
   if (x=='C') return 'G';
   if (x=='G') return 'C';
+  if (x=='#') return '#';
+  return '?';
 }
 
 
