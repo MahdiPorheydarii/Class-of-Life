@@ -12,9 +12,18 @@ private:
 
 public:
   dna RNAtoDNA();
-  Genome(string rn);
-  Genome(string dn1, string dn2);
-  Genome(string rn, string dn1, string dn2);
+  Genome(string rn){
+    this->RNA = rn;
+  };
+  Genome(string dn1, string dn2){
+    this->DNA.s1 = dn1;
+    this->DNA.s2 = dn2;
+  };
+  Genome(string rn, string dn1, string dn2){
+    this->RNA = rn;
+    this->DNA.s1 = dn1;
+    this->DNA.s2 = dn2;
+  };
   Genome();
   void des();
   void shortMut(char a, char b, int c);
@@ -119,7 +128,7 @@ void Genome::longMut(string S1, string S2)
   // RNA
 
   // DNA
-  size_t f = min(KMP(S1, DNA.s1), KMP(S1, DNA.s2));
+  f = min(KMP(S1, DNA.s1), KMP(S1, DNA.s2));
   if (KMP(S1, DNA.s1) <= KMP(S1, DNA.s2))
   {
     string tmp = "";
@@ -127,7 +136,7 @@ void Genome::longMut(string S1, string S2)
     tmp += S2;
     tmp += DNA.s1.substr(f + S2.size(), DNA.s1.size());
     this->DNA.s1 = tmp;
-    string q;
+    string q="";
     for (auto x : DNA.s1)
     {
       q += complement(x);
@@ -136,12 +145,12 @@ void Genome::longMut(string S1, string S2)
   }
   else
   {
-    string tmp = "",q="";
+    string tmp = "";
+    string q="";
     tmp += DNA.s2.substr(0, f);
     tmp += S2;
     tmp += DNA.s2.substr(f + S2.size(), DNA.s2.size());
     this->DNA.s2 = tmp;
-    string q;
     for (auto x : DNA.s2)
     {
       q += complement(x);
