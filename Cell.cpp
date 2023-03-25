@@ -41,10 +41,10 @@ void go(){
   int ch;
   cout << "please choose what you want to do:" << endl;
   cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4- perform a long mutation"<< endl;
-  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n 7- exit";
+  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n 7- perform cell die method on Cells\n 9- exit\n";
   x : ;
   cin >> ch;
-  if(ch > 7 or ch < 1){
+  if(ch > 9 or ch < 1){
     cout << "wrong number, please try again";
     goto x;
   }
@@ -156,6 +156,22 @@ void go(){
     goto y;
   }
   if(ch == 7){
+    int ch7;
+    cout << "please enter Cell's index which you want to do the performance on(1 based):" << endl;
+    cin >> ch7;
+    c[ch7 - 1].alive();
+    vector<bool> r = c[ch7 - 1].alive();
+    cout << "Alive Chromosomes :" << endl << endl;
+    for(int i = 0; i < c[ch7 - 1].gz.size(); i++){
+      if(r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
+    }
+    cout << "Dead Chromosomes :" << endl << endl;
+    for(int i = 0; i < c[ch7 - 1].gz.size(); i++){
+      if(!r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
+    }
+    goto y;
+  }
+  if(ch == 9){
     cout << "Good Bye!" << endl;
   }
 }

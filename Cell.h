@@ -16,7 +16,6 @@ public:
   Genome(string dn1, string dn2);
   Genome(string rn, string dn1, string dn2);
   Genome();
-  void des();
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
@@ -33,8 +32,8 @@ private:
   vector<Genome> gz;
 
 public:
+  vector<bool> alive();
   void setCell(vector<Genome> r);
-  void Celldie();
   vector<Genome> getGz();
 };
 
@@ -65,11 +64,6 @@ Genome::Genome(string rn, string dn1, string dn2)
   this->RNA = rn;
   this->DNA.s1 = dn1;
   this->DNA.s2 = dn2;
-}
-
-void Genome::des()
-{
-  // Genome::~Genome();
 }
 
 void Genome::shortMut(char A, char C, int n)
@@ -196,22 +190,16 @@ void Cell::setCell(vector<Genome> r)
   gz = r;
 }
 
-void Cell::Celldie()
-{
-  for (int j = 0; j < gz.size(); j++)
-  {
-    int die = 0;
-    for (int i = 0; i < gz[j].getDNA().s1.size(); i++)
-    {
-      if (gz[j].getDNA().s1[i] != complement(gz[j].getDNA().s2[i]))
-        die++;
+vector<bool> Cell::alive(){
+  vector<bool> tmp;
+  for(int i = 0; i < gz.size(); i++){
+    int d = 0;
+    for(int j = 0; j < gz[i].getDNA().s1.size(); j++){
+      if(gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j])) d++;
     }
-    if (die > 4)
-    {
-      gz[j].des();
-      j -= 1;
-    }
+    (d > 5) ? tmp.push_back(false) : tmp.push_back(true);
   }
+  return tmp;
 }
 
 vector<Genome> Cell::getGz()
