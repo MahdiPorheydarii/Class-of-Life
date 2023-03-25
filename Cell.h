@@ -119,7 +119,7 @@ void Genome::longMut(string S1, string S2)
   // RNA
 
   // DNA
-  size_t f = min(KMP(S1,DNA.s1), KMP(S1,DNA.s2));
+  int f = min(KMP(S1,DNA.s1), KMP(S1,DNA.s2));
   if(KMP(S1,DNA.s1) <= KMP(S1,DNA.s2)){
     string ttmpp, q;
     for(int i = 0; i < f; i++){

@@ -41,7 +41,7 @@ void go(){
   int ch;
   cout << "please choose what you want to do:" << endl;
   cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4- perform a long mutation"<< endl;
-  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n";
+  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n 7- exit";
   x : ;
   cin >> ch;
   if(ch > 7 or ch < 1){
@@ -124,7 +124,7 @@ void go(){
     else if(ch4 == 1){
       int genPick;
       string S1, S2;
-      cout << "please tell us the Genome's index which you want to perform a short mutation on(1 based):" << endl;
+      cout << "please tell us the Genome's index which you want to perform a long mutation on(1 based):" << endl;
       cin >> genPick;
       cout << "please tell us the string you want to look for in Genome:" << endl;
       cin >> S1;
@@ -154,6 +154,9 @@ void go(){
     cin >> ch6;
     cout << g[ch6 - 1].RNAtoDNA().s1 << endl << g[ch6 - 1].RNAtoDNA().s2 << endl;
     goto y;
+  }
+  if(ch == 7){
+    cout << "Good Bye!" << endl;
   }
 }
 
