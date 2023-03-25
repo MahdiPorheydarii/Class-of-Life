@@ -31,14 +31,16 @@ void CellSet(int n, int a){
     Genome tmp(dn1, dn2);
     tempo.push_back(tmp);
   }
-  Cell yum(tempo);
-  c.push_back(yum);
+  // Cell yum;
+  // yum.gz = tempo;
+  // c.push_back(yum);
 }
 
 void go(){
+  y : ;
   int ch;
   cout << "please choose what you want to do:" << endl;
-  cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4-perform a long mutation"<< endl;
+  cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4- perform a long mutation"<< endl;
   cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n";
   x : ;
   cin >> ch;
@@ -51,7 +53,7 @@ void go(){
     cout << "how many Genomes do you want to create?" << endl;
     cin >> gCount;
     GenSet(gCount);
-    return;
+    goto y;
   }
   if(ch == 2){
     int cCount;
@@ -65,7 +67,7 @@ void go(){
     }
     system("CLS");
     cout << "you have succesfully added your Cells to database, please choose your next wish:" << endl;
-    return;
+    goto y;
   }
   if(ch == 3){
     int ch3;
@@ -74,6 +76,7 @@ void go(){
     cin >> ch3;
     if((ch3 == 1 and g.size() == 0) or (ch3 == 2 and c.size() == 0)){
       cout << "You have not added any "; (ch3 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
+      goto y;
     }
     else if(ch3 == 1){
       int num, nuum;
@@ -89,7 +92,7 @@ void go(){
       g[num-1].shortMut(s1, s2, nuum);
       cout << "short mutation has been performed." << endl << "Genome after the performance:" << endl;
       cout << "Genome's RNA:\n" << g[num-1].getRNA() << endl << "Genome's DNA:\n" << g[num-1].getDNA().s1 << endl << g[num-1].getDNA().s2 << endl;
-      return;
+      goto y;
     }
     else if(ch3 == 2){
       int cellPick, chroPick, nuum;
@@ -107,7 +110,7 @@ void go(){
       c[cellPick - 1].gz[chroPick - 1].shortMut(s1, s2, nuum);
       cout << "short mutation has been performed." << endl << "Chromosome after the performance:" << endl;
       cout <<"Chromosome's DNA:\n" <<c[cellPick - 1].gz[chroPick - 1].getDNA().s1 << endl << c[cellPick - 1].gz[chroPick - 1].getDNA().s2 << endl;
-      return;
+      goto y;
     }
   }
   if(ch == 4){
@@ -130,7 +133,7 @@ void go(){
       g[genPick - 1].longMut(S1, S2);
       cout << "long mutation has been performed." << endl << "Genome after the performance:" << endl;
       cout << "Genome's RNA:\n" << g[genPick - 1].getRNA() << endl << "Genome's DNA:\n" << g[genPick - 1].getDNA().s1 << endl << g[genPick - 1].getDNA().s2 << endl;
-      return;
+      goto y;
     }
     else if(ch4 == 2){
 
@@ -150,7 +153,7 @@ void go(){
     cout << "please tell us the Genome's index which you want to perform a RNA to DNA transform on(1 based):" << endl;
     cin >> ch6;
     cout << g[ch6 - 1].RNAtoDNA().s1 << endl << g[ch6 - 1].RNAtoDNA().s2 << endl;
-    return;
+    goto y;
   }
 }
 

@@ -26,13 +26,13 @@ public:
 
 class Cell : private Genome
 {
-private:
+  friend void CellSet(int n, int a);
   friend void go();
+private:
   int cntChromo;
   vector<Genome> gz;
 
 public:
-  Cell(vector<Genome> r);
   void setCell(vector<Genome> r);
   void Celldie();
   vector<Genome> getGz();
@@ -191,14 +191,9 @@ string Genome::getRNA()
   return RNA;
 }
 
-Cell::Cell(vector<Genome> r)
-{
-  this->gz = r;
-}
-
 void Cell::setCell(vector<Genome> r)
 {
-  this->gz = r;
+  for(auto x:r) gz.push_back(x);
 }
 
 void Cell::Celldie()
