@@ -107,7 +107,7 @@ void go(){
       cin >> s2;
       cout << "please tell us the number of times which you want to perform the act(n)" << endl;
       cin >> nuum;
-      c[cellPick - 1].gz[chroPick - 1].shortMut(s1, s2, nuum);
+      c[cellPick - 1].shortMut(s1, s2, nuum, chroPick - 1);
       cout << "short mutation has been performed." << endl << "Chromosome after the performance:" << endl;
       cout <<"Chromosome's DNA:\n" <<c[cellPick - 1].gz[chroPick - 1].getDNA().s1 << endl << c[cellPick - 1].gz[chroPick - 1].getDNA().s2 << endl;
       goto y;
@@ -136,7 +136,23 @@ void go(){
       goto y;
     }
     else if(ch4 == 2){
-
+      int cellPick, chroPick1, chroPick2;
+      string S1, S2;
+      cout << "please tell us the Cell's index which you want to perform a long mutation on(1 based):" << endl;
+      cin >> cellPick;
+      cout << "please tell us the first Chromosomes's index which you want to perform a long mutation on(1 based):" << endl;
+      cin >> chroPick1;
+      cout << "please tell us the second Chromosomes's index which you want to perform a long mutation on(1 based):" << endl;
+      cin >> chroPick2;
+      cout << "please tell us the string you wish to look for in the first chromosome and do a long mutation on" << endl;
+      cin >> S1;
+      cout << "please tell us the string you wish to look for in the second chromosome and do a long mutation on" << endl;
+      cin >> S2;
+      c[cellPick - 1].longMut(S1, chroPick1, S2, chroPick2);
+      cout << "long mutation has been performed." << endl << "Chromosomes after the performance:" << endl;
+      cout <<"first Chromosome's DNA:\n" <<c[cellPick - 1].gz[chroPick1 - 1].getDNA().s1 << endl << c[cellPick - 1].gz[chroPick1 - 1].getDNA().s2 << endl;
+      cout <<"second Chromosome's DNA:\n" <<c[cellPick - 1].gz[chroPick2 - 1].getDNA().s1 << endl << c[cellPick - 1].gz[chroPick2 - 1].getDNA().s2 << endl;
+      goto y;
     }
   }
   if(ch == 5){
@@ -146,6 +162,32 @@ void go(){
     cin >> ch5;
     if((ch5 == 1 and g.size() == 0) or (ch5 == 2 and c.size() == 0)){
       cout << "You have not added any "; (ch5 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
+    }
+    else if(ch5 == 1){
+      int genPick;
+      string S1;
+      cout << "please tell us the Genome's index which you want to perform a reverse mutation on(1 based):" << endl;
+      cin >> genPick;
+      cout << "please tell us the string you wish to reverse in the Genome:" << endl;
+      cin >> S1;
+      g[genPick - 1].revMut(S1);
+      cout << "reverse mutation has been performed." << endl << "Genome after the performance:" << endl;
+      cout << "Genome's RNA:\n" << g[genPick - 1].getRNA() << endl << "Genome's DNA:\n" << g[genPick - 1].getDNA().s1 << endl << g[genPick - 1].getDNA().s2 << endl;
+      goto y;
+    }
+    else if(ch5 == 2){
+      int cellPick, chroPick;
+      string S1;
+      cout << "please tell us the Cell's index which you want to perform a reverse mutation on(1 based):" << endl;
+      cin >> cellPick;
+      cout << "please tell us the Chromosomes's index which you want to perform a reverse mutation on(1 based):" << endl;
+      cin >> chroPick;
+      cout << "please tell us the string you wish to reverse in the Chromosome" << endl;
+      cin >> S1;
+      c[cellPick - 1].revMut(S1, chroPick - 1);
+      cout << "reverse mutation has been performed." << endl << "Chromosome after the performance:" << endl;
+      cout <<"Chromosome's DNA:\n" <<c[cellPick - 1].gz[chroPick - 1].getDNA().s1 << endl << c[cellPick - 1].gz[chroPick - 1].getDNA().s2 << endl;
+      goto y;
     }
   }
   if(ch == 6){
@@ -170,6 +212,9 @@ void go(){
       if(!r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
     }
     goto y;
+  }
+  if(ch == 8){
+
   }
   if(ch == 9){
     cout << "Good Bye!" << endl;

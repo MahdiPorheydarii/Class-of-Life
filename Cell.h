@@ -32,9 +32,12 @@ private:
   vector<Genome> gz;
 
 public:
-  vector<bool> alive();
+  void shortMut(char a, char b, int n, int index);
+  void longMut(string S1, int n, string S2, int b);
+  void revMut(string S, int n);
   void setCell(vector<Genome> r);
   vector<Genome> getGz();
+  vector<bool> alive();
 };
 
 dna Genome::RNAtoDNA()
@@ -205,4 +208,17 @@ vector<bool> Cell::alive(){
 vector<Genome> Cell::getGz()
 {
   return gz;
+}
+
+void Cell::revMut(string S, int n){
+  gz[n].revMut(S);
+}
+
+void Cell::shortMut(char a, char b, int n, int index){
+  gz[index].shortMut(a, b, n);
+}
+
+void Cell::longMut(string S1, int a, string S2, int b){
+  gz[a - 1].longMut(S1,S2);
+  gz[b - 1].longMut(S2,S1);
 }
