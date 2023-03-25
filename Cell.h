@@ -24,7 +24,7 @@ public:
   string getRNA();
 };
 
-class Cell : private Genome
+class Cell
 {
   friend void CellSet(int n, int a);
   friend void go();
@@ -193,7 +193,7 @@ string Genome::getRNA()
 
 void Cell::setCell(vector<Genome> r)
 {
-  for(auto x:r) gz.push_back(x);
+  gz = r;
 }
 
 void Cell::Celldie()

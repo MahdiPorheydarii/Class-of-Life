@@ -31,9 +31,9 @@ void CellSet(int n, int a){
     Genome tmp(dn1, dn2);
     tempo.push_back(tmp);
   }
-  // Cell yum;
-  // yum.gz = tempo;
-  // c.push_back(yum);
+  Cell yum;
+  yum.setCell(tempo);
+  c.push_back(yum);
 }
 
 void go(){
