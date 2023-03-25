@@ -22,6 +22,15 @@
         "xstring": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "cmath": "cpp"
+        "cmath": "cpp",
+        "*.tcc": "cpp",
+        "cstring": "cpp",
+        "fstream": "cpp",
+        "iomanip": "cpp",
+        "istream": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "system_error": "cpp",
+        "typeinfo": "cpp"
     }
 }

@@ -6,7 +6,7 @@
 
 int main()
 {
-    string a = "TAATTAAGCTCG";
+    string a = "TAATTAAGCTCGATGCCCTGATCGATGCCGAT";
     palindrome(a);
     
 }
