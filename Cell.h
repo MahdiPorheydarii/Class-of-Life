@@ -57,14 +57,14 @@ Genome::Genome(string rn)
 Genome::Genome(string dn1, string dn2)
 {
   this->DNA.s1 = dn1;
-  this->DNA.s1 = dn2;
+  this->DNA.s2 = dn2;
 }
 
 Genome::Genome(string rn, string dn1, string dn2)
 {
   this->RNA = rn;
   this->DNA.s1 = dn1;
-  this->DNA.s1 = dn2;
+  this->DNA.s2 = dn2;
 }
 
 void Genome::des()
