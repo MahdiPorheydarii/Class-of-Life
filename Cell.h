@@ -12,18 +12,9 @@ private:
 
 public:
   dna RNAtoDNA();
-  Genome(string rn){
-    this->RNA = rn;
-  };
-  Genome(string dn1, string dn2){
-    this->DNA.s1 = dn1;
-    this->DNA.s2 = dn2;
-  };
-  Genome(string rn, string dn1, string dn2){
-    this->RNA = rn;
-    this->DNA.s1 = dn1;
-    this->DNA.s2 = dn2;
-  };
+  Genome(string rn);
+  Genome(string dn1, string dn2);
+  Genome(string rn, string dn1, string dn2);
   Genome();
   void des();
   void shortMut(char a, char b, int c);
@@ -119,40 +110,38 @@ void Genome::shortMut(char A, char C, int n)
 void Genome::longMut(string S1, string S2)
 {
   // RNA
-  size_t f = KMP(S1, RNA);
-  string tmp = "";
-  tmp += RNA.substr(0, f);
-  tmp += S2;
-  tmp += RNA.substr(f + S2.size(), RNA.size());
-  this->RNA = tmp;
+  size_t r = KMP(S1,RNA);
+  string d;
+  for(int i = 0; i < r; i++) d+= RNA[i];
+  d += S2;
+  for(int i = r+S1.size(); i < RNA.size(); i++) d += RNA[i];
+  RNA = d;
   // RNA
 
   // DNA
-  f = min(KMP(S1, DNA.s1), KMP(S1, DNA.s2));
-  if (KMP(S1, DNA.s1) <= KMP(S1, DNA.s2))
-  {
-    string tmp = "";
-    tmp += DNA.s1.substr(0, f);
-    tmp += S2;
-    tmp += DNA.s1.substr(f + S2.size(), DNA.s1.size());
-    this->DNA.s1 = tmp;
-    string q="";
-    for (auto x : DNA.s1)
-    {
+  size_t f = min(KMP(S1,DNA.s1), KMP(S1,DNA.s2));
+  if(KMP(S1,DNA.s1) <= KMP(S1,DNA.s2)){
+    string ttmpp, q;
+    for(int i = 0; i < f; i++){
+      ttmpp += DNA.s1[i];
+    }
+    ttmpp += S2;
+    for(int i = r+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1[i];
+    DNA.s1 = ttmpp;
+    for(auto x:DNA.s1){
       q += complement(x);
     }
     DNA.s2 = q;
   }
-  else
-  {
-    string tmp = "";
-    string q="";
-    tmp += DNA.s2.substr(0, f);
-    tmp += S2;
-    tmp += DNA.s2.substr(f + S2.size(), DNA.s2.size());
-    this->DNA.s2 = tmp;
-    for (auto x : DNA.s2)
-    {
+  else{
+    string ttmpp, q;
+    for(int i = 0; i < f; i++){
+      ttmpp += DNA.s2[i];
+    }
+    ttmpp += S2;
+    for(int i = r+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2[i];
+    DNA.s2 = ttmpp;
+    for(auto x:DNA.s2){
       q += complement(x);
     }
     DNA.s1 = q;
