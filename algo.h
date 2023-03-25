@@ -86,7 +86,7 @@ int sum(vector<int> a){
 
 // palindrome algorithm
 
-vector<int> palindrome(string t) {
+void palindrome(string t) {
     string s;
     for(auto c: t) {
         s += string("#") + c;
@@ -105,11 +105,13 @@ vector<int> palindrome(string t) {
         }
     }
     vector<int> manc = vector<int>(begin(p) + 1, end(p) - 1);
-    
-    vector<int> result;
-    for (int i = 2; i < manc.size(); i++){
-        if (i%2==0) result.push_back((manc[i]-1)/2);
+    for (int i=1;i<manc.size()-1;i++){
+        if (manc[i]>1){
+            for (int j=i-manc[i]+2;j<=i+manc[i];j++){
+                if (s[j]!='#') cout<<s[j];
+            }
+            cout<<endl;
+        }
     }
 
-    return result;
 }
