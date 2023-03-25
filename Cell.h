@@ -69,7 +69,7 @@ Genome::Genome(string rn, string dn1, string dn2)
 
 void Genome::des()
 {
-  Genome::~Genome();
+  // Genome::~Genome();
 }
 
 void Genome::shortMut(char A, char C, int n)

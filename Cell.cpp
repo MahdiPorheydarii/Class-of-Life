@@ -3,7 +3,6 @@ using namespace std;
 
 vector<Genome> g;
 vector<Cell> c;
-vector<Animal> a;
 
 void GenSet(int n){
   for(int i = 0; i < n; i++){
@@ -39,8 +38,8 @@ void CellSet(int n, int a){
 void go(){
   int ch;
   cout << "please choose what you want to do:" << endl;
-  cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- create Animal(s)\n 4- perform a short mutation\n 5-perform a long mutation"<< endl;
-  cout << " 6- perform a reverse mutation\n 7- perform RNA to DNA transform\n";
+  cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4-perform a long mutation"<< endl;
+  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n";
   x : ;
   cin >> ch;
   if(ch > 7 or ch < 1){
@@ -69,39 +68,14 @@ void go(){
     return;
   }
   if(ch == 3){
-    int aCount;
-    cout << "how many animals do you want to create?" << endl;
-    cin >> aCount;
-    for(int i = 0; i < aCount; i++){
-      int gzz;
-        cout << "how many chromosomes does your " << i+1 <<" numbered animal cell have?" << endl;
-        cin >> gzz;
-        Animal A1;
-        vector<Genome> ttmp;
-        for(int i = 0; i < gzz; i++){
-          string dn1, dn2;
-          cout << "enter number " << i+1 << " Chromosome's part 1 DNA:" << endl;
-          cin >> dn1;
-          cout << "enter number " << i+1 << " Chromosome's part 2 DNA:" << endl;
-          cin >> dn2;
-          Genome tomp(dn1, dn2);
-          ttmp.push_back(tomp);
-        }
-        A1.cc.setCell(ttmp);
-    }
-    system("CLS");
-    cout << "you have succesfully added your Animals to database, please choose your next wish:" << endl;
-    return;
-  }
-  if(ch == 4){
-    int ch4;
+    int ch3;
     cout << "please choose the object you want to perform on :" << endl;
     cout << " 1- Genome\n 2- Cell" << endl;
-    cin >> ch4;
-    if((ch4 == 1 and g.size() == 0) or (ch4 == 2 and c.size() == 0)){
-      cout << "You have not added any "; (ch4 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
+    cin >> ch3;
+    if((ch3 == 1 and g.size() == 0) or (ch3 == 2 and c.size() == 0)){
+      cout << "You have not added any "; (ch3 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
     }
-    else if(ch4 == 1){
+    else if(ch3 == 1){
       int num, nuum;
       char s1, s2;
       cout << "please tell us the Genome's index which you want to perform a short mutation on(1 based):" << endl;
@@ -117,7 +91,7 @@ void go(){
       cout << "Genome's RNA:\n" << g[num-1].getRNA() << endl << "Genome's DNA:\n" << g[num-1].getDNA().s1 << endl << g[num-1].getDNA().s2 << endl;
       return;
     }
-    else if(ch4 == 2){
+    else if(ch3 == 2){
       int cellPick, chroPick, nuum;
       char s1, s2;
       cout << "please tell us the Cell's index which you want to perform a short mutation on(1 based):" << endl;
@@ -136,15 +110,15 @@ void go(){
       return;
     }
   }
-  if(ch == 5){
-    int ch5;
+  if(ch == 4){
+    int ch4;
     cout << "please choose the object you want to perform on :" << endl;
     cout << " 1- Genome\n 2- Cell" << endl;
-    cin >> ch5;
-    if((ch5 == 1 and g.size() == 0) or (ch5 == 2 and c.size() == 0)){
-      cout << "You have not added any "; (ch5 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
+    cin >> ch4;
+    if((ch4 == 1 and g.size() == 0) or (ch4 == 2 and c.size() == 0)){
+      cout << "You have not added any "; (ch4 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
     }
-    else if(ch5 == 1){
+    else if(ch4 == 1){
       int genPick;
       string S1, S2;
       cout << "please tell us the Genome's index which you want to perform a short mutation on(1 based):" << endl;
@@ -158,24 +132,24 @@ void go(){
       cout << "Genome's RNA:\n" << g[genPick - 1].getRNA() << endl << "Genome's DNA:\n" << g[genPick - 1].getDNA().s1 << endl << g[genPick - 1].getDNA().s2 << endl;
       return;
     }
-    else if(ch5 == 2){
+    else if(ch4 == 2){
 
+    }
+  }
+  if(ch == 5){
+    int ch5;
+    cout << "please choose the object you want to perform on :" << endl;
+    cout << " 1- Genome\n 2- Cell" << endl;
+    cin >> ch5;
+    if((ch5 == 1 and g.size() == 0) or (ch5 == 2 and c.size() == 0)){
+      cout << "You have not added any "; (ch5 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
     }
   }
   if(ch == 6){
     int ch6;
-    cout << "please choose the object you want to perform on :" << endl;
-    cout << " 1- Genome\n 2- Cell" << endl;
-    cin >> ch6;
-    if((ch6 == 1 and g.size() == 0) or (ch6 == 2 and c.size() == 0)){
-      cout << "You have not added any "; (ch6 == 1) ? cout << "Genome" : cout << "Cell"; cout << " to the database yet, please try again" << endl;
-    }
-  }
-  if(ch == 7){
-    int ch7;
     cout << "please tell us the Genome's index which you want to perform a RNA to DNA transform on(1 based):" << endl;
-    cin >> ch7;
-    cout << g[ch7 - 1].RNAtoDNA().s1 << endl << g[ch7 - 1].RNAtoDNA().s2 << endl;
+    cin >> ch6;
+    cout << g[ch6 - 1].RNAtoDNA().s1 << endl << g[ch6 - 1].RNAtoDNA().s2 << endl;
     return;
   }
 }

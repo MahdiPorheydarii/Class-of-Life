@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 class Animal : public Cell
 {
   friend bool operator ==(Animal a, Animal b);
@@ -14,7 +12,7 @@ class Animal : public Cell
 
 public:
   Animal();
-  double similarityPercentage();
+  double similarityPercentage(Animal A, Animal B);
 
 };
 
