@@ -106,7 +106,7 @@ void palindrome(string t) {
     }
     vector<int> manc = vector<int>(begin(p) + 1, end(p) - 1);
     for (int i=1;i<manc.size()-1;i++){
-        if (manc[i]>1){
+        if (manc[i]>3){
             for (int j=i-manc[i]+2;j<=i+manc[i];j++){
                 if (s[j]!='#') cout<<s[j];
             }
