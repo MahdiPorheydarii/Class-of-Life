@@ -27,7 +27,7 @@ class Cell
 {
   friend void CellSet(int n, int a);
   friend void go();
-private:
+protected:
   int cntChromo;
   vector<Genome> gz;
 

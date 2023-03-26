@@ -5,29 +5,39 @@
 
 using namespace std;
 
-class Animal : public Cell
+class Animal : protected Cell
 {
-  friend bool operator ==(Animal a, Animal b);
-  friend Animal operator +(Animal a, Animal b);
 
 public:
+  friend double similarityPercentage(Animal A, Animal B) ;
+  friend bool operator==(Animal a, Animal b);
+  friend Animal operator+(Animal a, Animal b);
+  Animal clone();
   Animal();
-  double similarityPercentage(Animal A, Animal B);
-
 };
 
-bool operator ==(Animal a, Animal b){
-  
+Animal clone(){
+  Animal res;
+  return res;
 }
 
-Animal operator +(Animal a, Animal b){
-
-}
-
-double Animal::similarityPercentage(Animal A, Animal B){
+double similarityPercentage(Animal A, Animal B)
+{
   double a = 0;
-  for(int i = 0; i < A.getGz().size(); i++){
-    a += StringSim(A.getGz()[i].getDNA().s1, B.getGz()[i].getDNA().s1);
+  for (int i = 0; i < min(A.gz.size(),B.gz.size()); i++)
+  {
+    a += StringSim(A.gz[i].getDNA().s1, B.gz[i].getDNA().s1);
   }
-  return a / A.getGz().size();
+  return a / ((double)(A.gz.size()+B.gz.size())/2);
+}
+
+bool operator==(Animal a, Animal b)
+{
+  if (similarityPercentage(a, b) >= 70)
+    return true;
+  else return false;
+}
+
+Animal operator+(Animal a, Animal b)
+{
 }
