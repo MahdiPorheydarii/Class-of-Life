@@ -7,7 +7,6 @@ using namespace std;
 
 class Animal : public Cell
 {
-
 public:
   friend double similarityPercentage(Animal A, Animal B);
   friend bool operator==(Animal a, Animal b);
@@ -54,7 +53,7 @@ bool operator==(Animal a, Animal b)
 {
   if (similarityPercentage(a, b) >= 70 and a.gz.size()==b.gz.size())
     return true;
-  else return false;
+  return false;
 }
 
 Animal operator+(Animal a, Animal b)
