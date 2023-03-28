@@ -2,6 +2,9 @@
 #include "structures.h"
 #include "algo.h"
 
+#ifndef CELL_H
+#define CELL_H
+
 using namespace std;
 
 class Genome
@@ -19,6 +22,7 @@ public:
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
+  void setCell(vector<Genome> r);
   dna getDNA();
   string getRNA();
 };
@@ -222,3 +226,5 @@ void Cell::longMut(string S1, int a, string S2, int b){
   gz[a - 1].longMut(S1,S2);
   gz[b - 1].longMut(S2,S1);
 }
+
+#endif

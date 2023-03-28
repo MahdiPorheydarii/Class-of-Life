@@ -5,29 +5,37 @@
 
 using namespace std;
 
-class Animal : protected Cell
+class Animal : public Cell
 {
 
 public:
-  friend double similarityPercentage(Animal A, Animal B) ;
-  friend Animal clone();
+  friend double similarityPercentage(Animal A, Animal B);
   friend bool operator==(Animal a, Animal b);
   friend Animal operator+(Animal a, Animal b);
   Animal clone();
   Animal();
+  Animal(Cell a){
+    for(auto x:a.getGz())
+      gz.push_back(x);
+  }
 };
 
 Animal Animal::clone(){
-  Animal res;
+  vector<Genome> r;
+  Cell c;
   if (gz.size()<10){
-    res.gz=gz;
-    return res;
+    c.setCell(gz);
+    Animal A1(c);
+    return A1;
   } else {
-    res.gz=gz;
-    res.gz.pop_back();
+    r = gz;
+    r.pop_back();
     srand(time(0));
     int rand_id=rand()%gz.size();
-    res.gz.push_back(gz[rand_id]);
+    r.push_back(gz[rand_id]);
+    c.setCell(r);
+    Animal A1(c);
+    return A1;
   }
 }
 

@@ -31,6 +31,8 @@
         "sstream": "cpp",
         "stdexcept": "cpp",
         "system_error": "cpp",
-        "typeinfo": "cpp"
-    }
+        "typeinfo": "cpp",
+        "utility": "cpp"
+    },
+    "cmake.configureOnOpen": false
 }

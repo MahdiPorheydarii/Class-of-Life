@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define pb push_back
-#define vc vector
+#ifndef ALGO_H
+#define ALGO_H
 
 char complement(char x){
   if (x=='A') return 'T';
@@ -115,3 +115,5 @@ void palindrome(string t) {
     }
 
 }
+
+#endif
