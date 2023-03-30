@@ -30,6 +30,7 @@ class Cell
 {
   friend void CellSet(int n, int a);
   friend void go();
+
 protected:
   bool isAlive = 1;
   vector<Genome> gz;
@@ -110,44 +111,58 @@ void Genome::shortMut(char A, char C, int n)
 void Genome::longMut(string S1, string S2)
 {
   // RNA
-  size_t r = KMP(S1,RNA);
+  size_t r = KMP(S1, RNA);
   string d;
-  for(int i = 0; i < r; i++) d+= RNA[i];
+  for (int i = 0; i < r; i++)
+    d += RNA[i];
   d += S2;
-  for(int i = r+S1.size(); i < RNA.size(); i++) d += RNA[i];
+  for (int i = r + S1.size(); i < RNA.size(); i++)
+    d += RNA[i];
   RNA = d;
   // RNA
 
   // DNA
-  if(KMP(S1,DNA.s1) <= KMP(S1,DNA.s2) or KMP(S1,DNA.s2) == -1){
-    if(!(KMP(S1,DNA.s1) == -1 and KMP(S1,DNA.s2) == -1)){
-    int f = KMP(S1,DNA.s1);
-    string ttmpp, q;
-    for(int i = 0; i < f; i++){
-      ttmpp += DNA.s1[i];
+  size_t s1id = KMP(S1, DNA.s1);
+  size_t s2id = KMP(S1, DNA.s2);
+  string res;
+  if (s2id == -1 or (s1id < s2id))
+  {
+
+    for (int i = 0; i < s1id; i++)
+    {
+      res += DNA.s1[i];
     }
-    ttmpp += S2;
-    for(int i = f+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1[i];
-    DNA.s1 = ttmpp;
-    for(auto x:DNA.s1){
-      q += complement(x);
+
+    res += S2;
+    for (int i = s1id + S1.length(); i < DNA.s1.length(); i++)
+    {
+      res += DNA.s1[i];
     }
-    DNA.s2 = q;
+    this->DNA.s1 = res;
+    this->DNA.s2 = "";
+    for (auto x : DNA.s1)
+    {
+      this->DNA.s2 += complement(x);
     }
   }
-  else{
-    int f = KMP(S1,DNA.s2);
-    string ttmpp, q;
-    for(int i = 0; i < f; i++){
-      ttmpp += DNA.s2[i];
+  else
+  {
+    for (int i = 0; i < s2id; i++)
+    {
+      res += DNA.s2[i];
     }
-    ttmpp += S2;
-    for(int i = f+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2[i];
-    DNA.s2 = ttmpp;
-    for(auto x:DNA.s2){
-      q += complement(x);
+
+    res += S2;
+    for (int i = s2id + S1.length(); i < DNA.s2.length(); i++)
+    {
+      res += DNA.s2[i];
     }
-    DNA.s1 = q;
+    this->DNA.s2 = res;
+    this->DNA.s1 = "";
+    for (auto x : DNA.s2)
+    {
+      this->DNA.s1 += complement(x);
+    }
   }
   // DNA
 }
@@ -199,11 +214,15 @@ void Cell::setCell(vector<Genome> r)
   gz = r;
 }
 
-void Cell::Alive(){
-  for(int i = 0; i < gz.size(); i++){
+void Cell::Alive()
+{
+  for (int i = 0; i < gz.size(); i++)
+  {
     int d = 0;
-    for(int j = 0; j < gz[i].getDNA().s1.size(); j++){
-      if(gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j])) d++;
+    for (int j = 0; j < gz[i].getDNA().s1.size(); j++)
+    {
+      if (gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j]))
+        d++;
     }
     if(d > 5){
       isAlive = 0; cellDie();
@@ -216,17 +235,20 @@ vector<Genome> Cell::getGz()
   return gz;
 }
 
-void Cell::revMut(string S, int n){
+void Cell::revMut(string S, int n)
+{
   gz[n].revMut(S);
 }
 
-void Cell::shortMut(char a, char b, int n, int index){
+void Cell::shortMut(char a, char b, int n, int index)
+{
   gz[index].shortMut(a, b, n);
 }
 
-void Cell::longMut(string S1, int a, string S2, int b){
-  gz[a - 1].longMut(S1,S2);
-  gz[b - 1].longMut(S2,S1);
+void Cell::longMut(string S1, int a, string S2, int b)
+{
+  gz[a - 1].longMut(S1, S2);
+  gz[b - 1].longMut(S2, S1);
 }
 
 void Cell::cellDie(){
