@@ -197,22 +197,22 @@ void go(){
     cout << g[ch6 - 1].RNAtoDNA().s1 << endl << g[ch6 - 1].RNAtoDNA().s2 << endl;
     goto y;
   }
-  if(ch == 7){
-    int ch7;
-    cout << "please enter Cell's index which you want to do the performance on(1 based):" << endl;
-    cin >> ch7;
-    c[ch7 - 1].alive();
-    vector<bool> r = c[ch7 - 1].alive();
-    cout << "Alive Chromosomes :" << endl << endl;
-    for(int i = 0; i < c[ch7 - 1].gz.size(); i++){
-      if(r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
-    }
-    cout << "Dead Chromosomes :" << endl << endl;
-    for(int i = 0; i < c[ch7 - 1].gz.size(); i++){
-      if(!r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
-    }
-    goto y;
-  }
+  // if(ch == 7){
+  //   int ch7;
+  //   cout << "please enter Cell's index which you want to do the performance on(1 based):" << endl;
+  //   cin >> ch7;
+  //   c[ch7 - 1].alive();
+  //   vector<bool> r = c[ch7 - 1].alive();
+  //   cout << "Alive Chromosomes :" << endl << endl;
+  //   for(int i = 0; i < c[ch7 - 1].gz.size(); i++){
+  //     if(r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
+  //   }
+  //   cout << "Dead Chromosomes :" << endl << endl;
+  //   for(int i = 0; i < c[ch7 - 1].gz.size(); i++){
+  //     if(!r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << c[ch7 - 1].gz[i].getDNA().s1 << "\t" << c[ch7 - 1].gz[i].getDNA().s2 << endl << endl;
+  //   }
+  //   goto y;
+  // }
   if(ch == 8){
     int cellPick, chroPick;
     cout << "please tell us the Cell's inxed which you want to perform palindrome search on(1 based):" << endl;

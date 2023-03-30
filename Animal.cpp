@@ -120,21 +120,21 @@ void go(){
     else cout << "chosen Virus is not dangerous for chosen Animal" << endl;
     goto y;
   }
-  else if(ch == 8){
-    int Ap;
-    cout << "please choose Animal's index which you want to perform cell die method on(1 based):" << endl;
-    cin >> Ap;
-    vector<bool> r = Az[Ap - 1].alive();
-    cout << "Alive Chromosomes :" << endl << endl;
-    for(int i = 0; i < Az[Ap - 1].gz.size(); i++){
-      if(r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << Az[Ap - 1].gz[i].getDNA().s1 << "\t" << Az[Ap - 1].gz[i].getDNA().s2 << endl << endl;
-    }
-    cout << "Dead Chromosomes :" << endl << endl;
-    for(int i = 0; i < Az[Ap - 1].gz.size(); i++){
-      if(!r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << Az[Ap - 1].gz[i].getDNA().s1 << "\t" << Az[Ap - 1].gz[i].getDNA().s2 << endl << endl;
-    }
-    goto y;
-  }
+  // else if(ch == 8){
+  //   int Ap;
+  //   cout << "please choose Animal's index which you want to perform cell die method on(1 based):" << endl;
+  //   cin >> Ap;
+  //   vector<bool> r = Az[Ap - 1].Alive();
+  //   cout << "Alive Chromosomes :" << endl << endl;
+  //   for(int i = 0; i < Az[Ap - 1].gz.size(); i++){
+  //     if(r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << Az[Ap - 1].gz[i].getDNA().s1 << "\t" << Az[Ap - 1].gz[i].getDNA().s2 << endl << endl;
+  //   }
+  //   cout << "Dead Chromosomes :" << endl << endl;
+  //   for(int i = 0; i < Az[Ap - 1].gz.size(); i++){
+  //     if(!r[i]) cout << "chromosome " << i+1 << "'s DNA : " << "\t" << Az[Ap - 1].gz[i].getDNA().s1 << "\t" << Az[Ap - 1].gz[i].getDNA().s2 << endl << endl;
+  //   }
+  //   goto y;
+  // }
   else if(ch == 9) cout << "Good Bye!" << endl;
 }
 

@@ -31,7 +31,7 @@ class Cell
   friend void CellSet(int n, int a);
   friend void go();
 protected:
-  int cntChromo;
+  bool isAlive = 1;
   vector<Genome> gz;
 
 public:
@@ -40,7 +40,8 @@ public:
   void revMut(string S, int n);
   void setCell(vector<Genome> r);
   vector<Genome> getGz();
-  vector<bool> alive();
+  void Alive();
+  void cellDie();
 };
 
 dna Genome::RNAtoDNA()
@@ -106,7 +107,6 @@ void Genome::shortMut(char A, char C, int n)
   }
 }
 
-// should be completed
 void Genome::longMut(string S1, string S2)
 {
   // RNA
@@ -119,27 +119,30 @@ void Genome::longMut(string S1, string S2)
   // RNA
 
   // DNA
-  int f = min(KMP(S1,DNA.s1), KMP(S1,DNA.s2));
-  if(KMP(S1,DNA.s1) <= KMP(S1,DNA.s2)){
+  if(KMP(S1,DNA.s1) <= KMP(S1,DNA.s2) or KMP(S1,DNA.s2) == -1){
+    if(!(KMP(S1,DNA.s1) == -1 and KMP(S1,DNA.s2) == -1)){
+    int f = KMP(S1,DNA.s1);
     string ttmpp, q;
     for(int i = 0; i < f; i++){
       ttmpp += DNA.s1[i];
     }
     ttmpp += S2;
-    for(int i = r+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1[i];
+    for(int i = f+S1.size(); i < DNA.s1.size(); i++) ttmpp += DNA.s1[i];
     DNA.s1 = ttmpp;
     for(auto x:DNA.s1){
       q += complement(x);
     }
     DNA.s2 = q;
+    }
   }
   else{
+    int f = KMP(S1,DNA.s2);
     string ttmpp, q;
     for(int i = 0; i < f; i++){
       ttmpp += DNA.s2[i];
     }
     ttmpp += S2;
-    for(int i = r+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2[i];
+    for(int i = f+S1.size(); i < DNA.s2.size(); i++) ttmpp += DNA.s2[i];
     DNA.s2 = ttmpp;
     for(auto x:DNA.s2){
       q += complement(x);
@@ -196,16 +199,16 @@ void Cell::setCell(vector<Genome> r)
   gz = r;
 }
 
-vector<bool> Cell::alive(){
-  vector<bool> tmp;
+void Cell::Alive(){
   for(int i = 0; i < gz.size(); i++){
     int d = 0;
     for(int j = 0; j < gz[i].getDNA().s1.size(); j++){
       if(gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j])) d++;
     }
-    (d > 5) ? tmp.push_back(false) : tmp.push_back(true);
+    if(d > 5){
+      isAlive = 0; cellDie();
+    }
   }
-  return tmp;
 }
 
 vector<Genome> Cell::getGz()
@@ -226,4 +229,7 @@ void Cell::longMut(string S1, int a, string S2, int b){
   gz[b - 1].longMut(S2,S1);
 }
 
+void Cell::cellDie(){
+  gz.clear();
+}
 #endif
