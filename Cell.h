@@ -22,7 +22,6 @@ public:
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
-  void setCell(vector<Genome> r);
   dna getDNA();
   string getRNA();
 };

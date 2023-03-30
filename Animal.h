@@ -72,7 +72,25 @@ bool operator==(Animal a, Animal b)
 
 Animal operator+(Animal a, Animal b)
 {
-
+  Animal A = a.clone();
+  Animal B = b.clone();
+  vector<Genome> res;
+  if(A.gz.size() < 10)
+    res = A.gz;
+  else{
+    for(int i = 0; i < (0.7 * A.gz.size()); i++){
+      res.push_back(A.gz[i]);
+    }
+    for(int i = res.size(); i < A.gz.size(); i++){
+      srand(time(0));
+      int pick = rand() % B.gz.size();
+      res.push_back(B.gz[pick]);
+    }
+  }
+  Cell tmp;
+  tmp.setCell(res);
+  Animal tt(tmp);
+  return tt;
 }
 
 Virus::Virus(string a){

@@ -74,7 +74,7 @@ void go(){
     cin >> f;
     cout << "please enter the second Animal's index which you want to compare:(1 based)" << endl;
     cin >> s;
-    (Az[f-1] == Az[s-1]) ? cout << "True" << endl : cout << "False" << endl;
+    (Az[f-1] == Az[s-1]) ? cout << "Animals are from the same breed(True)" << endl : cout << "Animals are not from the same beed(False)" << endl;
     goto y;
   }
   else if(ch == 5){
