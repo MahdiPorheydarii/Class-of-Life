@@ -80,7 +80,7 @@ void Genome::shortMut(char A, char C, int n)
   vector<int> p1, p2;
   for (int i = 0; i < RNA.size(); i++)
   {
-    if (RNA[i] == A and c1 != n)
+    if (RNA[i] == A and c1 != n and RNA.size() > 0)
     {
       RNA[i] = C;
       c1++;
@@ -88,23 +88,15 @@ void Genome::shortMut(char A, char C, int n)
     if (DNA.s1[i] == A and c2 != n)
     {
       DNA.s1[i] = C;
-      p1.push_back(i);
       c2++;
+      DNA.s2[i] = complement(DNA.s1[i]);
     }
     if (DNA.s2[i] == A and c2 != n)
     {
       DNA.s2[i] = C;
-      p2.push_back(i);
       c2++;
+      DNA.s1[i] = complement(DNA.s2[i]);
     }
-  }
-  for (auto x : p1)
-  {
-    DNA.s2[x] = complement(DNA.s1[x]);
-  }
-  for (auto x : p2)
-  {
-    DNA.s1[x] = complement(DNA.s2[x]);
   }
 }
 
@@ -112,6 +104,7 @@ void Genome::longMut(string S1, string S2)
 {
   // RNA
   size_t r = KMP(S1, RNA);
+  if(r != -1){
   string d;
   for (int i = 0; i < r; i++)
     d += RNA[i];
@@ -119,49 +112,53 @@ void Genome::longMut(string S1, string S2)
   for (int i = r + S1.size(); i < RNA.size(); i++)
     d += RNA[i];
   RNA = d;
+  }
   // RNA
 
   // DNA
   size_t s1id = KMP(S1, DNA.s1);
   size_t s2id = KMP(S1, DNA.s2);
   string res;
-  if (s2id == -1 or (s1id < s2id))
-  {
+  if(s2id + s1id > -2){
+    if (s2id == -1 or (s1id < s2id and s1id != -1))
+    {
 
-    for (int i = 0; i < s1id; i++)
-    {
-      res += DNA.s1[i];
-    }
+      for (int i = 0; i < s1id; i++)
+      {
+        res += DNA.s1[i];
+      }
 
-    res += S2;
-    for (int i = s1id + S1.length(); i < DNA.s1.length(); i++)
-    {
-      res += DNA.s1[i];
+      res += S2;
+      for (int i = s1id + S1.length(); i < DNA.s1.length(); i++)
+      {
+        res += DNA.s1[i];
+      }
+      this->DNA.s1 = res;
+      this->DNA.s2 = "";
+      for (auto x : DNA.s1)
+      {
+        this->DNA.s2 += complement(x);
+      }
     }
-    this->DNA.s1 = res;
-    this->DNA.s2 = "";
-    for (auto x : DNA.s1)
+    else
     {
-      this->DNA.s2 += complement(x);
-    }
-  }
-  else
-  {
-    for (int i = 0; i < s2id; i++)
-    {
-      res += DNA.s2[i];
-    }
+      cout << "Shool" << endl;
+      for (int i = 0; i < s2id; i++)
+      {
+        res += DNA.s2[i];
+      }
 
-    res += S2;
-    for (int i = s2id + S1.length(); i < DNA.s2.length(); i++)
-    {
-      res += DNA.s2[i];
-    }
-    this->DNA.s2 = res;
-    this->DNA.s1 = "";
-    for (auto x : DNA.s2)
-    {
-      this->DNA.s1 += complement(x);
+      res += S2;
+      for (int i = s2id + S1.length(); i < DNA.s2.length(); i++)
+      {
+        res += DNA.s2[i];
+      }
+      this->DNA.s2 = res;
+      this->DNA.s1 = "";
+      for (auto x : DNA.s2)
+      {
+        this->DNA.s1 += complement(x);
+      }
     }
   }
   // DNA
@@ -177,26 +174,32 @@ void Genome::revMut(string S1)
   string S2 = S1;
   reverse(S1.begin(), S1.end());
   size_t r = KMP(S1, RNA);
-  for (int i = r; i < S1.size() + r; i++)
-    RNA[i] = S2[i];
-
-  if (KMP(S1, DNA.s1) < KMP(S2, DNA.s2))
-  {
-    size_t t = KMP(S1, DNA.s1);
-    for (int i = t; i < S1.size() + t; i++)
-      DNA.s1[i] = S2[i];
+  if(r != -1){
+    for (int i = r; i < S1.size() + r; i++)
+      RNA[i] = S2[i - r];
   }
-  else
-  {
-    size_t t = KMP(S2, DNA.s1);
-    for (int i = t; i < S2.size() + t; i++)
-      DNA.s1[i] = S2[i];
+  int s1id = KMP(S1, DNA.s1);
+  int s2id = KMP(S1, DNA.s2);
+  if(s1id + s2id > -2){
+    if (s2id == -1 or (s1id < s2id and s1id != -1))
+    {
+      size_t t = s1id;
+      for (int i = t; i < S1.size() + t; i++)
+        DNA.s1[i] = S2[i - t];
+      for (auto x : DNA.s1)
+        temp += complement(x);
+      DNA.s2 = temp;
+    }
+    else
+    {
+      size_t t = s2id;
+      for (int i = t; i < S1.size() + t; i++)
+        DNA.s2[i] = S2[i - t];
+      for (auto x : DNA.s2)
+        temp += complement(x);
+      DNA.s1 = temp;
+    }
   }
-  for (auto x : DNA.s1)
-  {
-    temp += complement(x);
-  }
-  DNA.s2 = temp;
 }
 
 dna Genome::getDNA()

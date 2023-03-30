@@ -41,7 +41,7 @@ void go(){
   int ch;
   cout << "please choose what you want to do:" << endl;
   cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4- perform a long mutation"<< endl;
-  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n 8- perform a palindrome search 7- perform cell die method on Cells\n 9- exit\n";
+  cout << " 5- perform a reverse mutation\n 7- perform cell die method on Cells\n 6- perform RNA to DNA transform\n 8- perform a palindrome search\n 9- exit\n";
   x : ;
   cin >> ch;
   if(ch > 9 or ch < 1){
@@ -220,7 +220,9 @@ void go(){
     cout << "please tell us the Chromosome's index in Cell " << cellPick << " which you want to perform palindrome search on(1 based):" << endl;
     cin >> chroPick;
     cout << "palindromes of Chromosome " << chroPick << "'s of Cell " << cellPick << "'s are :" << endl;
+    palindrome(c[cellPick - 1].gz[chroPick - 1].getDNA().s1);
     palindrome(c[cellPick - 1].gz[chroPick - 1].getDNA().s2);
+    goto y;
   }
   if(ch == 9){
     cout << "Good Bye!" << endl;
