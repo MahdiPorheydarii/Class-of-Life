@@ -87,15 +87,15 @@ void Genome::shortMut(char A, char C, int n)
     }
     if (DNA.s1[i] == A and c2 != n)
     {
-      DNA.s1[i] = C;
+      this->DNA.s1[i] = C;
       c2++;
-      DNA.s2[i] = complement(DNA.s1[i]);
+      this->DNA.s2[i] = complement(DNA.s1[i]);
     }
     if (DNA.s2[i] == A and c2 != n)
     {
-      DNA.s2[i] = C;
+      this->DNA.s2[i] = C;
       c2++;
-      DNA.s1[i] = complement(DNA.s2[i]);
+      this->DNA.s1[i] = complement(DNA.s2[i]);
     }
   }
 }
@@ -248,8 +248,8 @@ void Cell::shortMut(char a, char b, int n, int index)
 
 void Cell::longMut(string S1, int a, string S2, int b)
 {
-  gz[a - 1].longMut(S1, S2);
-  gz[b - 1].longMut(S2, S1);
+  this->gz[a - 1].longMut(S1, S2);
+  this->gz[b - 1].longMut(S2, S1);
 }
 
 void Cell::cellDie(){
