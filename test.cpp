@@ -1,14 +1,13 @@
 #include <bits/stdc++.h>
-#include "cell.h"
-#include "Animal.h"
-
-
-
+#include "Cell.h"
+#include "algo.h"
 
 int main()
 {
-    string a = "TAATTAAGCTCGATGCCCTGATCGATGCCGAT";
-    string b = "TAATTAAGCTCGATGCCCTGATCGATGCCGAT";
-    string c = "ATTAATTCGAGCTCGATATTAATTCGAGCTCG";
-    
+    string a = "ATCGTAGCATGCGATGAT";
+    string b = "CGATGATGATATCGATGAT";
+    string c = "CGTAATCGCTAGCGCAGCTGAGGCTCGAT";
+    vector<string> v={a,b,c};
+
+    cout<<LongestCommonSubstring(v);
 }

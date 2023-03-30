@@ -41,7 +41,6 @@ int KMP(string s1, string s2){
             }
         }
     }
-    cout<<endl;
     int j=0;
     i=0;
     while ((n - i) >= (m - j)) {
@@ -114,6 +113,29 @@ void palindrome(string t) {
         }
     }
 
+}
+
+string LongestCommonSubstring(vector<string> rnas)
+{
+    int n = rnas.size();
+    string s = rnas[0];
+    int len = s.length();
+    string res = "";
+ 
+    for (int i = 0; i < len; i++) {
+        for (int j = i + 1; j <= len; j++) {
+            string stem = s.substr(i, j);
+            int k = 1;
+            for (k = 1; k < n; k++) {
+                if (KMP(stem,rnas[k]) == -1)
+                    break;
+            }
+            if (k == n && res.length() < stem.length())
+                res = stem;
+        }
+    }
+ 
+    return res;
 }
 
 #endif
