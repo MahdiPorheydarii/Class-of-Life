@@ -15,7 +15,7 @@ public:
   Animal clone();
   Animal();
   Animal(Cell a);
-  vector<bool> alive();
+  void cellDie();
 };
 
 class Virus
@@ -113,8 +113,8 @@ bool Virus::isBad(Animal A){
   return 0; // is not bad
 }
 
-vector<bool> Animal::alive(){
+void Animal::cellDie(){
   Cell tmp;
   tmp.setCell(gz);
-  return tmp.alive();
+  tmp.Alive();
 }

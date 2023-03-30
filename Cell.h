@@ -32,7 +32,7 @@ class Cell
   friend void go();
 
 protected:
-  int cntChromo;
+  bool isAlive = 1;
   vector<Genome> gz;
 
 public:
@@ -41,7 +41,8 @@ public:
   void revMut(string S, int n);
   void setCell(vector<Genome> r);
   vector<Genome> getGz();
-  vector<bool> alive();
+  void Alive();
+  void cellDie();
 };
 
 dna Genome::RNAtoDNA()
@@ -107,7 +108,6 @@ void Genome::shortMut(char A, char C, int n)
   }
 }
 
-// should be completed
 void Genome::longMut(string S1, string S2)
 {
   // RNA
@@ -214,20 +214,18 @@ void Cell::setCell(vector<Genome> r)
   gz = r;
 }
 
-vector<bool> Cell::alive()
-{
-  vector<bool> tmp;
-  for (int i = 0; i < gz.size(); i++)
-  {
+void Cell::Alive(){
+  for(int i = 0; i < gz.size(); i++){
     int d = 0;
     for (int j = 0; j < gz[i].getDNA().s1.size(); j++)
     {
       if (gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j]))
         d++;
     }
-    (d > 5) ? tmp.push_back(false) : tmp.push_back(true);
+    if(d > 5){
+      isAlive = 0; cellDie();
+    }
   }
-  return tmp;
 }
 
 vector<Genome> Cell::getGz()
@@ -251,4 +249,7 @@ void Cell::longMut(string S1, int a, string S2, int b)
   gz[b - 1].longMut(S2, S1);
 }
 
+void Cell::cellDie(){
+  gz.clear();
+}
 #endif
