@@ -4,6 +4,7 @@ using namespace std;
 
 vector<Animal> Az;
 vector<Cell> Cz;
+vector<Virus> Vz;
 
 void setGz(int a){
   vector<Genome> r;
@@ -50,7 +51,13 @@ void go(){
     goto y;
   }
   else if(ch == 2){
-
+    string r;
+    cout << "Please enter the virus RNA:" << endl;
+    cin >> r;
+    Virus tt(r);
+    Vz.push_back(tt);
+    cout << "you have succesfully added a Virus to database" << endl;
+    goto y;
   }
   else if(ch == 3){
     int f,s;
@@ -85,7 +92,16 @@ void go(){
 
   }
   else if(ch == 7){
-
+    int Ac, Vc;
+    cout << "please enter the Animal index you want to perform a virus check on(1 based):" << endl;
+    cin >> Ac;
+    cout << "please enter the Virus index you want to check on choosed Animal(1 based):" << endl;
+    cin >> Vc;
+    if(Vz[Vc - 1].isBad(Az[Ac - 1])){
+      cout << "chosen Virus is dangerous for chosen Animal" << endl;
+    }
+    else cout << "chosen Virus is not dangerous for chosen Animal" << endl;
+    goto y;
   }
   else if(ch == 8){
 

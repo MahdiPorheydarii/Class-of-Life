@@ -7,18 +7,32 @@ using namespace std;
 
 class Animal : public Cell
 {
+  friend class Virus;
 public:
   friend double similarityPercentage(Animal A, Animal B);
   friend bool operator==(Animal a, Animal b);
   friend Animal operator+(Animal a, Animal b);
   Animal clone();
   Animal();
-  Animal(Cell a){
-    for(auto x:a.getGz())
-      gz.push_back(x);
-  }
+  Animal(Cell a);
 };
 
+class Virus
+{
+  friend class Animal;
+private:
+  string RNA;
+
+public:
+  Virus(string a);
+  bool isBad(Animal A);
+
+};
+
+Animal::Animal(Cell a){
+  for(auto x:a.getGz())
+    gz.push_back(x);
+}
 Animal Animal::clone(){
   vector<Genome> r;
   Cell c;
@@ -59,4 +73,23 @@ bool operator==(Animal a, Animal b)
 Animal operator+(Animal a, Animal b)
 {
 
+}
+
+Virus::Virus(string a){
+  RNA = a;
+}
+bool Virus::isBad(Animal A){
+  vector<string> DNAs;
+  for(auto x:A.gz){
+    DNAs.push_back(x.getDNA().s1);
+  }
+  string fin = LongestCommonSubstring(DNAs);
+  string fin1;
+  for(auto x:fin){
+    fin1 += complement(x);
+  }
+  if(KMP(fin1, RNA) != -1 or KMP(fin, RNA) != -1){
+    return 1; // is bad
+  }
+  return 0; // is not bad
 }
