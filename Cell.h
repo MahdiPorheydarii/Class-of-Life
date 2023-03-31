@@ -115,23 +115,18 @@ void Genome::longMut(string S1, string S2)
   // DNA
   size_t s1id = KMP(S1, DNA.s1);
   size_t s2id = KMP(S1, DNA.s2);
-  string res;
   if (s2id==-1 or (s1id<=s2id and s1id!=-1)){
     string dna1=DNA.s1;
     dna1.replace(s1id,S1.size(),S2);
     this->DNA.s1 = dna1;
     cout<<s1id<<endl;
     string dna2;
-    for (auto x:DNA.s1){
-      dna2+=complement(x);
-    }
+    for (auto x:DNA.s1) dna2+=complement(x);
     this->DNA.s2=dna2;
   } else {
     DNA.s2.replace(s1id,S1.size(),S2);
     string dna1;
-    for (auto x:DNA.s2){
-      dna1+=complement(x);
-    }
+    for (auto x:DNA.s2) dna1+=complement(x);
     this->DNA.s1=dna1;
   }
   // DNA
