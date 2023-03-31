@@ -85,17 +85,13 @@ void Genome::shortMut(char A, char C, int n)
       RNA[i] = C;
       c1++;
     }
+  }
+  for (int i = 0; i < DNA.s1.size(); i++){
     if (DNA.s1[i] == A and c2 != n)
     {
       this->DNA.s1[i] = C;
       c2++;
       this->DNA.s2[i] = complement(DNA.s1[i]);
-    }
-    if (DNA.s2[i] == A and c2 != n)
-    {
-      this->DNA.s2[i] = C;
-      c2++;
-      this->DNA.s1[i] = complement(DNA.s2[i]);
     }
   }
 }
