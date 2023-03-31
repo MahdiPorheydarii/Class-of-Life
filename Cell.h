@@ -43,6 +43,7 @@ public:
   vector<Genome> getGz();
   void Alive();
   void cellDie();
+  void display();
 };
 
 dna Genome::RNAtoDNA()
@@ -115,47 +116,23 @@ void Genome::longMut(string S1, string S2)
   size_t s1id = KMP(S1, DNA.s1);
   size_t s2id = KMP(S1, DNA.s2);
   string res;
-  if(s2id + s1id > -2){
-    if (s2id == -1 or (s1id < s2id and s1id != -1))
-    {
-
-      for (int i = 0; i < s1id; i++)
-      {
-        res += DNA.s1[i];
-      }
-
-      res += S2;
-      for (int i = s1id + S1.length(); i < DNA.s1.length(); i++)
-      {
-        res += DNA.s1[i];
-      }
-      this->DNA.s1 = res;
-      this->DNA.s2 = "";
-      for (auto x : DNA.s1)
-      {
-        this->DNA.s2 += complement(x);
-      }
+  if (s2id==-1 or (s1id<=s2id and s1id!=-1)){
+    string dna1=DNA.s1;
+    dna1.replace(s1id,S1.size(),S2);
+    this->DNA.s1 = dna1;
+    cout<<s1id<<endl;
+    string dna2;
+    for (auto x:DNA.s1){
+      dna2+=complement(x);
     }
-    else
-    {
-      cout << "Shool" << endl;
-      for (int i = 0; i < s2id; i++)
-      {
-        res += DNA.s2[i];
-      }
-
-      res += S2;
-      for (int i = s2id + S1.length(); i < DNA.s2.length(); i++)
-      {
-        res += DNA.s2[i];
-      }
-      this->DNA.s2 = res;
-      this->DNA.s1 = "";
-      for (auto x : DNA.s2)
-      {
-        this->DNA.s1 += complement(x);
-      }
+    this->DNA.s2=dna2;
+  } else {
+    DNA.s2.replace(s1id,S1.size(),S2);
+    string dna1;
+    for (auto x:DNA.s2){
+      dna1+=complement(x);
     }
+    this->DNA.s1=dna1;
   }
   // DNA
 }
@@ -250,5 +227,12 @@ void Cell::longMut(string S1, int a, string S2, int b)
 
 void Cell::cellDie(){
   gz.clear();
+}
+
+void Cell::display(){
+  for (int i = 0; i <gz.size(); i++){
+    cout<<i+1<<endl;
+    cout<<gz[i].getRNA()<<endl<<gz[i].getDNA().s1<<endl<<gz[i].getDNA().s2<<endl;
+  }
 }
 #endif
