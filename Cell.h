@@ -9,7 +9,7 @@ using namespace std;
 
 class Genome
 {
-private:
+protected:
   dna DNA;
   string RNA;
 
@@ -18,7 +18,7 @@ public:
   Genome(string rn);
   Genome(string dn1, string dn2);
   Genome(string rn, string dn1, string dn2);
-  Genome();
+  Genome(){};
   void shortMut(char a, char b, int c);
   void longMut(string S1, string S2);
   void revMut(string S1);
@@ -119,7 +119,6 @@ void Genome::longMut(string S1, string S2)
     string dna1=DNA.s1;
     dna1.replace(s1id,S1.size(),S2);
     this->DNA.s1 = dna1;
-    cout<<s1id<<endl;
     string dna2;
     for (auto x:DNA.s1) dna2+=complement(x);
     this->DNA.s2=dna2;

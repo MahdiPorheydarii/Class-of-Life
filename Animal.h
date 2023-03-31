@@ -13,19 +13,18 @@ public:
   friend bool operator==(Animal a, Animal b);
   friend Animal operator+(Animal a, Animal b);
   Animal clone();
-  Animal();
+  Animal(){};
   Animal(Cell a);
   void cellDie();
 };
 
-class Virus
+class Virus : protected Genome
 {
   friend class Animal;
-private:
-  string RNA;
 
 public:
   Virus(string a);
+  Virus(){};
   bool isBad(Animal A);
 
 };
@@ -97,6 +96,7 @@ Animal operator+(Animal a, Animal b)
 Virus::Virus(string a){
   RNA = a;
 }
+
 bool Virus::isBad(Animal A){
   vector<string> DNAs;
   for(auto x:A.gz){
