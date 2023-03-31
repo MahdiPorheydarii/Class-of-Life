@@ -254,5 +254,6 @@ void Cell::longMut(string S1, int a, string S2, int b)
 
 void Cell::cellDie(){
   gz.clear();
+  delete this;
 }
 #endif
