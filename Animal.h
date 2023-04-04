@@ -54,13 +54,13 @@ Animal Animal::clone(){
 
 double similarityPercentage(Animal A, Animal B)
 {
-  int num_sim=0;
+  double ov = 0;
   for (int i=0; i<min(A.gz.size(), B.gz.size());i++){
-    if (A.gz[i].getDNA().s1==B.gz[i].getDNA().s1 and A.gz[i].getDNA().s2==B.gz[i].getDNA().s2){
-      ++num_sim;
-    }
+    double sim = StringSim(A.gz[i].getDNA().s1, B.gz[i].getDNA().s1) + StringSim(A.gz[i].getDNA().s2, B.gz[i].getDNA().s2);
+    sim /= 2.0;
+    ov += sim;
   }
-  return (double)num_sim / ((double)max(A.gz.size(), B.gz.size()))*100.0;
+  return ov / ((double)max(A.gz.size(), B.gz.size()));
 }
 
 bool operator==(Animal a, Animal b)

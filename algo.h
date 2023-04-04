@@ -76,13 +76,6 @@ double StringSim(string s1,string s2){
     return 100 * lenLCS/double(max(s1.length(),s2.length()));
 }
 
-// calculates sum of a vector members(shall be needed for calculating similarity percentage of two Animals)
-int sum(vector<int> a){
-    int b = 0;
-    for(auto x:a) b += x;
-    return b;
-}
-
 // palindrome algorithm
 
 void palindrome(string t) {
