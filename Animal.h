@@ -116,5 +116,8 @@ bool Virus::isBad(Animal A){
 void Animal::cellDie(){
   Cell tmp;
   tmp.setCell(gz);
-  tmp.Alive();
+  tmp.alive();
+  for(int i = 0; i < gz.size(); i++){
+    gz[i] = tmp.getGz()[i];
+  }
 }

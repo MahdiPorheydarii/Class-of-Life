@@ -24,6 +24,7 @@ public:
   void revMut(string S1);
   dna getDNA();
   string getRNA();
+  void cellDie();
 };
 
 class Cell
@@ -44,6 +45,7 @@ public:
   void Alive();
   void cellDie();
   void display();
+  void alive();
 };
 
 dna Genome::RNAtoDNA()
@@ -131,9 +133,6 @@ void Genome::longMut(string S1, string S2)
   // DNA
 }
 
-// next functions should be updated with respect to algo.h and structures.h
-
-// fixed with def functions, to be updated with algo.h functions
 void Genome::revMut(string S1)
 {
   string temp;
@@ -179,6 +178,10 @@ string Genome::getRNA()
   return RNA;
 }
 
+void Genome::cellDie(){
+  delete this;
+}
+
 void Cell::setCell(vector<Genome> r)
 {
   gz = r;
@@ -186,13 +189,17 @@ void Cell::setCell(vector<Genome> r)
 
 void Cell::Alive(){
   for(int i = 0; i < gz.size(); i++){
-    int d = 0;
+    int d = 0, AT = 0, CG = 0;
     for (int j = 0; j < gz[i].getDNA().s1.size(); j++)
     {
       if (gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j]))
         d++;
     }
-    if(d > 5){
+    for(int j = 0; j < gz[i].getDNA().s1.size(); j++){
+      if(gz[i].getDNA().s1[j] == 'A' and gz[i].getDNA().s2[j] == 'T' or (gz[i].getDNA().s1[j] == 'T' and gz[i].getDNA().s2[j] == 'A')) AT++;
+      if(gz[i].getDNA().s1[j] == 'G' and gz[i].getDNA().s2[j] == 'C' or (gz[i].getDNA().s1[j] == 'C' and gz[i].getDNA().s2[j] == 'G')) CG++;
+    }
+    if(d > 5 or AT/CG > 3){
       isAlive = 0; cellDie();
     }
   }
@@ -228,6 +235,24 @@ void Cell::display(){
   for (int i = 0; i <gz.size(); i++){
     cout<<i+1<<endl;
     cout<<gz[i].getRNA()<<endl<<gz[i].getDNA().s1<<endl<<gz[i].getDNA().s2<<endl;
+  }
+}
+
+void Cell::alive(){
+  for(int i = 0; i < gz.size(); i++){
+    int d = 0, AT = 0, CG = 0;
+    for (int j = 0; j < gz[i].getDNA().s1.size(); j++)
+    {
+      if (gz[i].getDNA().s1[j] != complement(gz[i].getDNA().s2[j]))
+        d++;
+    }
+    for(int j = 0; j < gz[i].getDNA().s1.size(); j++){
+      if(gz[i].getDNA().s1[j] == 'A' and gz[i].getDNA().s2[j] == 'T' or (gz[i].getDNA().s1[j] == 'T' and gz[i].getDNA().s2[j] == 'A')) AT++;
+      if(gz[i].getDNA().s1[j] == 'G' and gz[i].getDNA().s2[j] == 'C' or (gz[i].getDNA().s1[j] == 'C' and gz[i].getDNA().s2[j] == 'G')) CG++;
+    }
+    if(d > 5 or AT/CG > 3){
+      gz[i].cellDie();
+    }
   }
 }
 #endif
