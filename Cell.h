@@ -80,7 +80,6 @@ Genome::Genome(string rn, string dn1, string dn2)
 void Genome::shortMut(char A, char C, int n)
 {
   int c1 = 0, c2 = 0;
-  vector<int> p1, p2;
   for (int i = 0; i < RNA.size(); i++)
   {
     if (RNA[i] == A and c1 != n and RNA.size() > 0)
@@ -95,6 +94,12 @@ void Genome::shortMut(char A, char C, int n)
       this->DNA.s1[i] = C;
       c2++;
       this->DNA.s2[i] = complement(DNA.s1[i]);
+    }
+    if (DNA.s2[i] == A and c2 != n)
+    {
+      this->DNA.s2[i] = C;
+      c2++;
+      this->DNA.s1[i] = complement(DNA.s2[i]);
     }
   }
 }
