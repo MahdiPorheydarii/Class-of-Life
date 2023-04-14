@@ -124,9 +124,11 @@ void go(){
     int Ap;
     cout << "please choose Animal's index which you want to perform cell die method on(1 based):" << endl;
     cin >> Ap;
-    Az[Ap - 1].Alive();
-    if(!Az[Ap - 1].isAlive) cout << "this cell is now dead and will be deleted." << endl;
-    else cout << "this cell remains alive" << endl;
+    Az[Ap - 1].cellDie();
+    cout << "cell die method has been performed, Alive chromosomes are listed below:" << endl;
+    for(auto x:Az[Ap - 1].gz){
+      cout << x.getDNA().s1 << endl << x.getDNA().s2 << endl << endl;
+    }
     goto y;
   }
   else if(ch == 9) cout << "Good Bye!" << endl;

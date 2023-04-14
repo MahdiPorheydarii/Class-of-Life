@@ -201,7 +201,7 @@ void go(){
     int ch7;
     cout << "please choose Animal's index which you want to perform cell die method on(1 based):" << endl;
     cin >> ch7;
-    c[ch7 - 1].Alive();
+    c[ch7 - 1].alive();
     if(!c[ch7 - 1].isAlive) cout << "this cell is now dead and will be deleted." << endl;
     else cout << "this cell remains alive" << endl;
     goto y;

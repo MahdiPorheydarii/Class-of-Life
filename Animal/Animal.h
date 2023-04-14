@@ -116,8 +116,10 @@ bool Virus::isBad(Animal A){
 void Animal::cellDie(){
   Cell tmp;
   tmp.setCell(gz);
-  tmp.alive();
-  for(int i = 0; i < gz.size(); i++){
-    gz[i] = tmp.getGz()[i];
+  Cell q;
+  q.setCell(tmp.Alive());
+  gz.clear();
+  for(auto x:q.getGz()){
+    gz.push_back(x);
   }
 }

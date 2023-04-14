@@ -10,7 +10,7 @@ char complement(char x){
   if (x=='C') return 'G';
   if (x=='G') return 'C';
   if (x=='#') return '#';
-  return '?';
+  return ' ';
 }
 
 

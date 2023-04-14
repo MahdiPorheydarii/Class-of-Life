@@ -42,7 +42,7 @@ public:
   void revMut(string S, int n);
   void setCell(vector<Genome> r);
   vector<Genome> getGz();
-  void Alive();
+  vector<Genome> Alive();
   void cellDie();
   void display();
   void alive();
@@ -192,8 +192,10 @@ void Cell::setCell(vector<Genome> r)
   gz = r;
 }
 
-void Cell::Alive(){
+vector<Genome> Cell::Alive(){
+  bool al[gz.size()];
   for(int i = 0; i < gz.size(); i++){
+    al[i] = 1;
     int d = 0, AT = 0, CG = 0;
     for (int j = 0; j < gz[i].getDNA().s1.size(); j++)
     {
@@ -205,9 +207,13 @@ void Cell::Alive(){
       if(gz[i].getDNA().s1[j] == 'G' and gz[i].getDNA().s2[j] == 'C' or (gz[i].getDNA().s1[j] == 'C' and gz[i].getDNA().s2[j] == 'G')) CG++;
     }
     if(d > 5 or AT/CG > 3){
-      isAlive = 0; cellDie();
+      al[i] = 0;
     }
   }
+  vector<Genome> tmp;
+  for(int i = 0; i < gz.size(); i++)
+    if(al[i]) tmp.push_back(gz[i]);
+  return tmp;
 }
 
 vector<Genome> Cell::getGz()
@@ -236,13 +242,6 @@ void Cell::cellDie(){
   delete this;
 }
 
-void Cell::display(){
-  for (int i = 0; i <gz.size(); i++){
-    cout<<i+1<<endl;
-    cout<<gz[i].getRNA()<<endl<<gz[i].getDNA().s1<<endl<<gz[i].getDNA().s2<<endl;
-  }
-}
-
 void Cell::alive(){
   for(int i = 0; i < gz.size(); i++){
     int d = 0, AT = 0, CG = 0;
@@ -256,7 +255,7 @@ void Cell::alive(){
       if(gz[i].getDNA().s1[j] == 'G' and gz[i].getDNA().s2[j] == 'C' or (gz[i].getDNA().s1[j] == 'C' and gz[i].getDNA().s2[j] == 'G')) CG++;
     }
     if(d > 5 or AT/CG > 3){
-      gz[i].cellDie();
+      this->cellDie();
     }
   }
 }
