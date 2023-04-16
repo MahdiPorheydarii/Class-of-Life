@@ -41,10 +41,10 @@ void go(){
   int ch;
   cout << "please choose what you want to do:" << endl;
   cout << " 1- Create Genome(s)\n 2- Create Cell(s)\n 3- perform a short mutation\n 4- perform a long mutation"<< endl;
-  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n 7- perform cell die method on Cells\n 8- perform a palindrome search\n 9- exit\n";
+  cout << " 5- perform a reverse mutation\n 6- perform RNA to DNA transform\n 7- perform cell die method on Cells\n 8- perform a palindrome search\n 9- exit\n 0- go back\n";
   x : ;
   cin >> ch;
-  if(ch > 9 or ch < 1){
+  if(ch > 9 or ch < 0){
     cout << "wrong number, please try again";
     goto x;
   }
@@ -218,7 +218,12 @@ void go(){
     goto y;
   }
   if(ch == 9){
-    cout << "Good Bye!" << endl;
+    cout << "Good Bye!";
+  }
+  if(ch == 0){
+    system("cd ..");
+    system("cls");
+    system("m.exe");
   }
 }
 
